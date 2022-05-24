@@ -55,6 +55,7 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	
 	get_move_state()
+	
 	if is_idling:
 		jumps_made = 0;
 		if(sprite.is_flipped_v()):
@@ -83,7 +84,7 @@ func get_move_state():
 	is_running = is_on_floor() && velocity.x > 1
 	is_crouching = Input.is_action_pressed("move_crouch")
 	is_sliding = Input.is_action_just_pressed("move_crouch") && !is_zero_approx(velocity.x)
-	is_idling = is_on_floor() && velocity.x < 1 && !is_crouching
+	is_idling = is_on_floor() && velocity.x < 1 && !is_crouching || !is_sliding
 
 func apply_gravity() -> void:
 	# faster acceleration at start of fall with upper limit
