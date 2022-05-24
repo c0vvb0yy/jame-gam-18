@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/level/editor/DeathZone.gd" type="Script" id=1]
+
+[node name="DeathZone" type="Area2D"]
+collision_layer = 2
+script = ExtResource( 1 )
+
+[connection signal="area_entered" from="." to="." method="_on_DeathZone_area_entered"]
