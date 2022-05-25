@@ -10,17 +10,15 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node2D",
-"class": "Player",
-"language": "GDScript",
-"path": "res://src/Player.gd"
-},
-{
-"base": "Node2D",
 "class": "Arena",
 "language": "GDScript",
 "path": "res://src/level/arenas/Arena.gd"
+}, {
+"base": "Node2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://src/Player.gd"
 } ]
-
 _global_script_class_icons={
 "Arena": "",
 "Player": ""
@@ -29,7 +27,6 @@ _global_script_class_icons={
 [application]
 
 config/name="Jame-gam- 18"
-run/main_scene="res://src/Base.tscn"
 config/icon="res://icon.png"
 
 [autoload]
