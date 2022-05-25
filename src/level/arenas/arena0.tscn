@@ -19,7 +19,6 @@ position = Vector2( 72, 311 )
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 191, 144 )
 rotation = 3.14159
-scale = Vector2( 0.77152, -1.43211 )
 
 [node name="DeathZone" parent="." instance=ExtResource( 5 )]
 position = Vector2( 762, 225 )
