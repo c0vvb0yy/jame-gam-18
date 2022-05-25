@@ -33,5 +33,5 @@ func load_arena(arena_index: int):
 		
 		# place player there
 		var spawn_pos = new_arena.player_spawn_point_global_coords()
-		player.global_position = spawn_pos
+		#player.global_position = spawn_pos
 		# idk create the starting state of the player

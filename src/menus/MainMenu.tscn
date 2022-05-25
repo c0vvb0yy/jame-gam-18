@@ -15,17 +15,26 @@ margin_right = 64.0
 margin_bottom = 64.0
 texture_normal = ExtResource( 2 )
 
-[node name="QuitButton" type="TextureButton" parent="MainMenuButtons"]
+[node name="CreditsButton" type="TextureButton" parent="MainMenuButtons"]
 margin_top = 68.0
 margin_right = 64.0
 margin_bottom = 132.0
 texture_normal = ExtResource( 2 )
 
+[node name="QuitButton" type="TextureButton" parent="MainMenuButtons"]
+margin_top = 136.0
+margin_right = 64.0
+margin_bottom = 200.0
+texture_normal = ExtResource( 2 )
+
 [node name="LevelSelectionContainer" type="VBoxContainer" parent="."]
+margin_left = 113.0
+margin_top = 69.0
 margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="BackButton" type="TextureButton" parent="LevelSelectionContainer"]
+self_modulate = Color( 0.690196, 0.121569, 0.121569, 1 )
 margin_right = 64.0
 margin_bottom = 64.0
 texture_normal = ExtResource( 2 )
@@ -35,5 +44,20 @@ margin_top = 68.0
 margin_right = 64.0
 margin_bottom = 68.0
 
+[node name="CreditsContainer" type="VBoxContainer" parent="."]
+margin_left = 143.0
+margin_top = 146.0
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="BackButton" type="TextureButton" parent="CreditsContainer"]
+self_modulate = Color( 0.690196, 0.121569, 0.121569, 1 )
+margin_right = 64.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 2 )
+
 [connection signal="button_up" from="MainMenuButtons/LevelSelectButton" to="." method="_on_LevelSelectButton_button_up"]
+[connection signal="button_up" from="MainMenuButtons/CreditsButton" to="." method="_on_CreditsButton_button_up"]
 [connection signal="button_up" from="MainMenuButtons/QuitButton" to="." method="_on_QuitButton_button_up"]
+[connection signal="button_up" from="LevelSelectionContainer/BackButton" to="." method="_on_BackButton_button_up"]
+[connection signal="button_up" from="CreditsContainer/BackButton" to="." method="_on_BackButton_button_up"]
