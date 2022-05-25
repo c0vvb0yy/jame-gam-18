@@ -2,6 +2,8 @@ extends Node2D
 
 var player = null
 
+func _ready() -> void:
+	load_arena(GameData.next_arena)
 
 func get_player_ref():
 	var players =  get_tree().get_nodes_in_group("Player")
@@ -21,7 +23,7 @@ func load_arena(arena_index: int):
 	if file_exists:
 		# remove all previous arenas
 		for c in get_children():
-			if c is Arena:
+			if c.is_in_group("Arena"):
 				c.queue_free()
 		
 		# instance the new arena
