@@ -28,6 +28,7 @@ position = Vector2( 762, 225 )
 shape = SubResource( 1 )
 
 [node name="TileMap" type="TileMap" parent="."]
+z_index = 2
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
