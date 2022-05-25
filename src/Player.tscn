@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 30.4594, 31.4221 )
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Node2D" groups=["Player"]]
 position = Vector2( 131, 461 )
 scale = Vector2( -0.77152, 1.43211 )
 script = ExtResource( 1 )

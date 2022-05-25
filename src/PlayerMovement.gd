@@ -5,6 +5,8 @@ export var jump_strength :int  = 750
 export var max_jumps : int = 2
 export var gravity : int = 2500
 export var max_slide_force : int = 600
+export var jump_impulse_x = 140
+export var ground_slam_impuse_y = 1500
 
 var jumps_made = 0;
 var slide_force = 0;
@@ -31,21 +33,47 @@ func _ready():
 
 
 func _input(event: InputEvent) -> void:
-#	if event.is_action_released("move_crouch"):
-#		is_sliding = false
-#		slide_force = 0
+	
+	var left = false
+	if event.is_action("move_left"):
+		input = -1
+		left = true
+	elif event.is_action_released("move_right"):
+		input = 0
 	
 	if event.is_action("move_right"):
 		input = 1
+		left = false
 	elif event.is_action_released("move_left"):
-		input = 0
-	if event.is_action("move_left"):
-		input = -1
-	elif event.is_action_released("move_right"):
 		input = 0
 	
 	if event.is_action("move_left") && event.is_action("move_right"):
 		input = 0
+	
+
+#	if event.is_action("move_left"):
+#		#input = -1
+#		left = true
+#
+#
+#	if event.is_action("move_right"):
+#		#input = 1
+#		left = false
+#
+#	if left:
+#		input = -1
+#	else:
+#		input = 1
+#
+	if event.is_action_released("move_right"):
+		input = 0 if !left else -1
+	if event.is_action_released("move_left"):
+		input = 1 if !left else 0
+#
+#
+#
+#	if event.is_action("move_left") && event.is_action("move_right"):
+#		input = 0
 		
 		
 	
@@ -57,22 +85,6 @@ func _input(event: InputEvent) -> void:
 	
 
 func _physics_process(delta):
-	#apply_gravity()
-	
-#	if is_sliding:
-#		if(input == 1):
-#			slide_force = max_slide_force
-#		else:
-#			slide_force = -max_slide_force
-#		input = 0
-#	if slide_force > 0:
-#		slide_force -= slide_decay
-#		if slide_force <= 0:
-#			velocity.x = 0
-#	elif slide_force < 0:
-#		slide_force += slide_decay
-#		if slide_force >= 0:
-#			velocity.x = 0
 	if is_sliding:
 		slide_force = max_slide_force
 		#input = 0
@@ -81,24 +93,26 @@ func _physics_process(delta):
 		slide_force = 0
 		#velocity.x = 0
 	
+	# fake slide force is the one we actually slap onto the velocity
+	# slide force is the interal tracker var to handle decay
 	var fake_side_force = slide_force
 	if velocity.x > 0:
 		fake_side_force *= 1.0
 	else:
 		fake_side_force *= -1.0
 	
-	velocity.x = input * speed + fake_side_force
-	if fake_side_force > 0:
+	if !is_on_floor():
+		velocity.x = sign(velocity.x) * speed + fake_side_force
+	else:
+		velocity.x = input * speed + fake_side_force
+	if fake_side_force != 0:
+		# I forgot what the 50 does
 		 velocity.y += gravity * delta + (50 * (1 / fake_side_force))
 	else:
 		velocity.y += gravity * delta
 	
 	get_move_state()
 	
-#	if is_idling:
-#		jumps_made = 0;
-#		if(sprite.is_flipped_v()):
-#			sprite.set_flip_v(false)
 	
 	if is_on_floor() || is_on_wall():
 		jumps_made = 0
@@ -109,7 +123,7 @@ func _physics_process(delta):
 		
 		if is_sliding:
 			input = sign(velocity.x) * 1.0
-			velocity *= 100
+			velocity *= 100 # ???
 		
 	if is_double_jumping && jumps_made < max_jumps:
 		jump()
@@ -119,7 +133,7 @@ func _physics_process(delta):
 		sprite.set_flip_v(true)
 		if input == 0:
 			# ground slam
-			velocity.y = 1500
+			velocity.y = ground_slam_impuse_y
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
 	#print(is_sliding)
@@ -128,16 +142,16 @@ func _physics_process(delta):
 
 func jump():
 	velocity.y = -jump_strength
-	velocity.x += sign(input) * 80
-#	if velocity.x > 0:
-#		velocity.x += 80
-#	else:
-#		velocity.x -= 80
-	velocity.x *= 1.4
+	velocity.x = sign(input) * jump_impulse_x
+	
+	# more strength for when you jump mid air
+	if is_double_jumping:
+		velocity.x *= 2
 	
 	
 	jumps_made += 1
-	print(str("jumps ", jumps_made, " / ", max_jumps))
+	#print(str("jumps ", jumps_made, " / ", max_jumps))
+	
 
 func get_move_state():
 	is_falling = velocity.y > 0.0 && !is_on_floor()
@@ -149,15 +163,4 @@ func get_move_state():
 	is_sliding = Input.is_action_just_pressed("move_crouch") && !is_zero_approx(velocity.x)
 	is_idling = is_on_floor() && velocity.x < 1 && !is_crouching || !is_sliding
 
-func apply_gravity() -> void:
-	# faster acceleration at start of fall with upper limit
-	if velocity.y < 100:
-		velocity.y += gravity * 5
-	elif velocity.y < 250:
-		velocity.y += gravity * 2
-	elif velocity.y < 500:
-		velocity.y += gravity * 1.5
-	elif velocity.y > 2000:
-		velocity.y = 2000
-	else:
-		velocity.y += gravity
+

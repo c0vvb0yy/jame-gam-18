@@ -7,3 +7,4 @@ collision_layer = 2
 script = ExtResource( 1 )
 
 [connection signal="area_entered" from="." to="." method="_on_DeathZone_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_DeathZone_body_entered"]

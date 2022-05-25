@@ -17,7 +17,12 @@ func _ready() -> void:
 
 
 func _on_DeathZone_area_entered(area: Area2D) -> void:
-	if area is Player:
-		pass
+	if area.get_parent() is Player:
+		print("killed player")
 		# kill player
 		# reset level, implement recording
+
+
+func _on_DeathZone_body_entered(body: Node) -> void:
+	if body.get_parent() is Player:
+		print("killed player")
