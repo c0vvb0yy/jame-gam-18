@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Arena",
+"language": "GDScript",
+"path": "res://src/level/arenas/Arena.gd"
+} ]
+_global_script_class_icons={
+"Arena": ""
+}
+
 [application]
 
 config/name="Jame-gam- 18"
