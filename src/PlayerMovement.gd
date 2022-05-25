@@ -7,10 +7,12 @@ export var gravity : int = 2500
 export var max_slide_force : int = 600
 export var jump_impulse_x = 140
 export var ground_slam_impuse_y = 1500
+export var grappling_pull = 105
 
-var jumps_made = 0;
-var slide_force = 0;
-var velocity = Vector2.ZERO;
+var jumps_made = 0
+var slide_force = 0
+var velocity = Vector2.ZERO
+var chain_velocity = Vector2.ZERO
 
 #move state vars
 var is_falling : bool
@@ -27,8 +29,14 @@ var direction = Vector2.ZERO
 var slide_decay = 15
 
 onready var sprite = $Sprite
+
+var has_grappling_hook = true
+var grappling_hook
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if(has_grappling_hook):
+		grappling_hook = $GrapplingHook
 	pass # Replace with function body.
 
 
@@ -50,6 +58,10 @@ func _input(event: InputEvent) -> void:
 	if event.is_action("move_left") && event.is_action("move_right"):
 		input = 0
 	
+	if event.is_action_pressed("grapple_shoot"):
+		grappling_hook.shoot(get_global_mouse_position() - get_viewport().size * 0.5)
+	elif event.is_action_released("grapple_shoot"):
+		grappling_hook.release()
 
 #	if event.is_action("move_left"):
 #		#input = -1
