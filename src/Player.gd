@@ -1,17 +1,16 @@
 extends Node2D
-
 class_name Player
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
+signal kill_player
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func kill_player():
+	# get the arena controller
+	var controllers = get_tree().get_nodes_in_group("ArenaController")
+	if controllers.size() > 0:
+		var controller = controllers[0]
+		
+		# emit the signal that the player died
+		connect("kill_player", controller, "end_run")
+		emit_signal("kill_player")
+		disconnect("kill_player", controller, "end_run")

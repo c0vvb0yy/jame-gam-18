@@ -1,6 +1,9 @@
 extends Node2D
 
-var player = null
+var current_player = null
+var current_arena = null
+
+var player = preload("res://src/Player.tscn")
 
 func _ready() -> void:
 	load_arena(GameData.next_arena)
@@ -8,12 +11,13 @@ func _ready() -> void:
 func get_player_ref():
 	var players =  get_tree().get_nodes_in_group("Player")
 	if players.size() > 0:
-		player = players[0]
+		current_player = players[0]
 		# assign the first player we find to the referencee
 		# depending on how we implement the replay, this may have to be refactored
 	else:
-		pass
-		# instance a new player
+		var new_player = player.instance()
+		current_player = new_player
+		add_child(new_player)
 
 func load_arena(arena_index: int):
 	var file_path = str("res://src/level/arenas/arena", arena_index, ".tscn")
@@ -30,8 +34,40 @@ func load_arena(arena_index: int):
 		var arena_res = load(file_path)
 		var new_arena = arena_res.instance()
 		add_child(new_arena)
+		current_arena = new_arena
 		
 		# place player there
-		var spawn_pos = new_arena.player_spawn_point_global_coords()
-		#player.global_position = spawn_pos
+		get_player_ref()
+		position_player_at_spawn()
 		# idk create the starting state of the player
+
+
+func position_player_at_spawn():
+	if current_arena != null:
+		# get the spawn position
+		var spawn_pos = current_arena.player_spawn_point_global_coords()
+		
+		# get the player
+		var players = get_tree().get_nodes_in_group("Player")
+		if players.size() > 0:
+			current_player = players[0]
+		
+			# move player
+			current_player.global_position = spawn_pos
+		
+
+func end_run():
+	pass
+	# stop recording
+	# reset player position
+	# play all recordings
+	print("ctr got player kill")
+	
+
+func play_recordings():
+	pass
+	# play all recordings
+
+func start_run():
+	pass
+	# start timer
