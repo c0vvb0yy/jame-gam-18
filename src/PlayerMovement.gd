@@ -31,21 +31,24 @@ var slide_decay = 15
 
 onready var sprite = $Sprite
 
-var has_grappling_hook = true
 var grappling_hook
 
 var player_ping = preload("res://src/PlayerPing.tscn")
+var recorded_player = preload("res://src/RecordedPlayer.tscn")
 
 #replay vars
 var replay = [] #array of dicts that store button input press, begging and end
-var memory = {"L":0, "R":0, "J":0, "C":0, "H":0} #dictionary to hold input and when pressed
+var memory = {"L":0, "R":0, "J":0, "C":0, "H":0, "P": 0} #dictionary to hold input and when pressed
 var frames = 0
 var replay_index = 0
+
+var start_pos : Vector2
 
 func _ready():
 	frames = 0
 	replay_index = 0
-	if(has_grappling_hook):
+	start_pos = self.global_position
+	if GameData.allow_grappling_hook:
 		grappling_hook = $GrapplingHook
 
 
@@ -80,11 +83,11 @@ func _input(event: InputEvent) -> void:
 				memory.H = [frames, grappling_hook.hook_pos] #saving the start frame of being hooked and the pos where to get pulled to
 		elif event.is_action_released("grapple_shoot"):
 			grappling_hook.release()
-			replay.append({"key":"H", "start_frame":self.memory.H[0], "end_frame": self.frames})
+			replay.append({"key":"H", "start_frame":self.memory.H[0], "end_frame": self.frames, "hook_pos": self.memory.H[1]})
 	
 	if GameData.allow_ping:
 		if event.is_action_pressed("ping"):
-			
+			memory.P = frames
 			var controllers = get_tree().get_nodes_in_group("ArenaController")
 			if controllers.size() > 0:
 				var controller = controllers[0]
@@ -227,6 +230,8 @@ func save_input_for_replay() -> void:
 	if Input.is_action_just_released("move_right"): replay.append({"key":"R", "start_frame":self.memory.L, "end_frame":self.frames})
 	if Input.is_action_just_released("move_jump"): replay.append({"key":"J", "start_frame":self.memory.L, "end_frame":self.frames})
 	if Input.is_action_just_released("move_crouch"): replay.append({"key":"C", "start_frame":self.memory.L, "end_frame":self.frames})
+	if Input.is_action_just_released("ping"): replay.append({"key":"P", "start_frame":self.memory.P, "end_frame":self.frames})
+	
 
 func save_replay() -> void:
 	var file = File.new()
@@ -235,8 +240,23 @@ func save_replay() -> void:
 	file.store_var(replay)
 	file.close()
 
+func clear_memory():
+	memory = {"L":0, "R":0, "J":0, "C":0, "H":0, "P":0} 
+	frames = 0
+
+func create_ghost():
+	var controllers = get_tree().get_nodes_in_group("ArenaController")
+	if controllers.size() > 0:
+		var controller = controllers[0]
+		var new_ghost = recorded_player.instance()
+		new_ghost.get_node("RecordedPlayerMovement").replay_path = str("replay-", replay_index, ".owo")
+		new_ghost.global_position = start_pos
+		controller.add_child(new_ghost)
+	pass
 
 func _on_Player_kill_player():
 	save_replay()
+	clear_memory()
+	create_ghost()
 	replay_index += 1
 	pass # Replace with function body.

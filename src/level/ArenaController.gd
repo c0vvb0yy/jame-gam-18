@@ -19,7 +19,6 @@ func get_player_ref():
 	else:
 		var new_player = player.instance()
 		current_player = new_player
-		add_child(new_player)
 
 func load_arena(arena_index: int):
 	# trash all other arenas here
@@ -49,6 +48,7 @@ func load_arena(arena_index: int):
 		
 		# place player there
 		get_player_ref()
+		add_child(current_player)
 		position_player_at_spawn()
 		# idk create the starting state of the player
 
@@ -57,20 +57,13 @@ func position_player_at_spawn():
 	if current_arena != null:
 		# get the spawn position
 		var spawn_pos = current_arena.player_spawn_point_global_coords()
-		
-		# get the player
-		var players = get_tree().get_nodes_in_group("Player")
-		if players.size() > 0:
-			current_player = players[0]
-		
-			# move player
-			current_player.global_position = spawn_pos
-		
+		current_player.global_position = spawn_pos
 
 func show_victory_screen():
 	print("you won")
 
 func end_run():
+	position_player_at_spawn()
 	pass
 	# stop recording
 	# reset player position

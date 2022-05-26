@@ -78,6 +78,7 @@ ping={
 2d_physics/layer_2="DeathZone"
 2d_physics/layer_3="Ground"
 2d_physics/layer_4="Hook"
+2d_physics/layer_5="Ghost"
 
 [physics]
 
