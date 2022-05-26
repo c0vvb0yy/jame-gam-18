@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sandbox_tilemap_1.png-14961b57b0071caa10e6dc4dfbc4d521.stex"
+path="res://.import/victory_button_retry_hover.png-0ef8a6e7a19f5e2da77c4255d42c6259.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sandbox_tilemap_1.png"
-dest_files=[ "res://.import/sandbox_tilemap_1.png-14961b57b0071caa10e6dc4dfbc4d521.stex" ]
+source_file="res://assets/ui/victory_button_retry_hover.png"
+dest_files=[ "res://.import/victory_button_retry_hover.png-0ef8a6e7a19f5e2da77c4255d42c6259.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

@@ -8,6 +8,7 @@ export var max_slide_force : int = 600
 export var jump_impulse_x = 140
 export var ground_slam_impuse_y = 1500
 export var grappling_pull = 105
+export var mid_air_control = 30
 
 var jumps_made = 0
 var slide_force = 0
@@ -33,11 +34,10 @@ onready var sprite = $Sprite
 var has_grappling_hook = true
 var grappling_hook
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	if(has_grappling_hook):
 		grappling_hook = $GrapplingHook
-	pass # Replace with function body.
 
 
 func _input(event: InputEvent) -> void:
@@ -69,7 +69,11 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_released("grapple_shoot"):
 		grappling_hook.release()
 
-	
+
+func _process(delta: float) -> void:
+	update_player_sprite()
+
+
 
 func _physics_process(delta):
 	if is_sliding:
@@ -117,27 +121,33 @@ func _physics_process(delta):
 #	if is_jump_cancelled:
 #		velocity.y = 0
 	if is_crouching:
-		sprite.set_flip_v(true)
 		if input == 0:
 			# ground slam
 			velocity.y = ground_slam_impuse_y
 	
+	chain_velocity = Vector2.ZERO
 	if grappling_hook.is_hooked:
 		chain_velocity = grappling_hook.hook.position.normalized() * -grappling_pull
-#		if chain_velocity.y > 0:
-#			#pulling down isnt as strong
-#			chain_velocity.y *= 0.55
-#		else:
-#			#pulling up is stronger
-#			chain_velocity.y *= 500
-#		if sign(chain_velocity.x) != sign(input):
-#			#if we are going in a different direction than the chain is pulling us
-#			#reduce the pull
-#			chain_velocity.x *= 0.7
+		if chain_velocity.y > 0:
+			#pulling down isnt as strong
+			chain_velocity.y *= 0.55
+		else:
+			#pulling up is stronger
+			chain_velocity.y *= 3.00
+		if sign(chain_velocity.x) != sign(input):
+			#if we are going in a different direction than the chain is pulling us
+			# increase the pull so that we go towards the hook
+			chain_velocity.x *= 1.5
 	else:
 		chain_velocity = Vector2.ZERO
 	
-	velocity += chain_velocity
+	if chain_velocity != Vector2.ZERO:
+		velocity = chain_velocity * -5
+	
+	# mid-air control
+	if !is_on_floor():
+		velocity.x += sign(input) * mid_air_control
+		#velocity.x *= 0.5
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
 
@@ -154,6 +164,17 @@ func jump():
 	jumps_made += 1
 	#print(str("jumps ", jumps_made, " / ", max_jumps))
 	
+
+func update_player_sprite():
+	sprite.scale.y = 1
+	var orientation = sign(input)
+	if orientation != sprite.scale.x && orientation != 0:
+		sprite.scale.x = orientation
+	
+	if is_crouching && is_on_floor():
+		sprite.rotation_degrees = orientation * 15
+	else:
+		sprite.rotation_degrees = 0
 
 func get_move_state():
 	is_falling = velocity.y > 0.0 && !is_on_floor()

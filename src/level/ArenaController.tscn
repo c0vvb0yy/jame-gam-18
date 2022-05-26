@@ -7,6 +7,11 @@
 z_index = -2
 script = ExtResource( 1 )
 
-[node name="Bg" type="Sprite" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 3500, 3500 )
+
+[node name="Bg" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2( 111, 87 )
 texture = ExtResource( 2 )

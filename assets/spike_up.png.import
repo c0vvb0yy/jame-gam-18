@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/brickTileset.png-e5bab3e374259cbd35383d8e6a8f5b4d.stex"
+path="res://.import/spike_up.png-6b637f02f923cb3f8d7efe290fd040b6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/brickTileset.png"
-dest_files=[ "res://.import/brickTileset.png-e5bab3e374259cbd35383d8e6a8f5b4d.stex" ]
+source_file="res://assets/spike_up.png"
+dest_files=[ "res://.import/spike_up.png-6b637f02f923cb3f8d7efe290fd040b6.stex" ]
 
 [params]
 

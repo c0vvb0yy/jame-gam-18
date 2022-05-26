@@ -1,5 +1,7 @@
 extends Node2D
 
+
+
 var current_player = null
 var current_arena = null
 
@@ -20,7 +22,16 @@ func get_player_ref():
 		add_child(new_player)
 
 func load_arena(arena_index: int):
-	var file_path = str("res://src/level/arenas/arena", arena_index, ".tscn")
+	# trash all other arenas here
+	for c in get_children():
+		if c.has_method("player_spawn_point_global_coords"):
+			c.queue_free()
+	
+	#var file_path = str("res://src/level/arenas/arena", arena_index, ".tscn")
+	# get file path
+	var file_path = ""
+	if arena_index < GameData.ARENA_ORDER.size():
+		file_path = GameData.ARENA_ORDER[arena_index]
 	# check if that level exists
 	var file_to_check = File.new()
 	var file_exists = file_to_check.file_exists(file_path)
@@ -56,6 +67,9 @@ func position_player_at_spawn():
 			current_player.global_position = spawn_pos
 		
 
+func show_victory_screen():
+	print("you won")
+
 func end_run():
 	pass
 	# stop recording
@@ -71,3 +85,5 @@ func play_recordings():
 func start_run():
 	pass
 	# start timer
+
+
