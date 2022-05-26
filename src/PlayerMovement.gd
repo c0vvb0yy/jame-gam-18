@@ -36,8 +36,15 @@ var grappling_hook
 
 var player_ping = preload("res://src/PlayerPing.tscn")
 
+#replay vars
+var replay = [] #array of dicts that store button input press, begging and end
+var memory = {"L":0, "R":0, "J":0, "C":0, "H":0} #dictionary to hold input and when pressed
+var frames = 0
+var replay_index = 0
 
 func _ready():
+	frames = 0
+	replay_index = 0
 	if(has_grappling_hook):
 		grappling_hook = $GrapplingHook
 
@@ -69,8 +76,11 @@ func _input(event: InputEvent) -> void:
 	if GameData.allow_grappling_hook:
 		if event.is_action_pressed("grapple_shoot"):
 			grappling_hook.shoot(get_global_mouse_position() - self.global_position )#+ get_viewport().size * 0.5)
+			if !grappling_hook.is_flying && memory.H == 0: #saving the first frame where the grappling hook is hooked
+				memory.H = [frames, grappling_hook.hook_pos] #saving the start frame of being hooked and the pos where to get pulled to
 		elif event.is_action_released("grapple_shoot"):
 			grappling_hook.release()
+			replay.append({"key":"H", "start_frame":self.memory.H[0], "end_frame": self.frames})
 	
 	if GameData.allow_ping:
 		if event.is_action_pressed("ping"):
@@ -88,6 +98,9 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta):
+	
+	save_input_for_replay()
+	
 	if is_sliding:
 		slide_force = max_slide_force
 		#input = 0
@@ -162,6 +175,8 @@ func _physics_process(delta):
 		#velocity.x *= 0.5
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
+	
+	frames += 1
 
 
 func jump():
@@ -198,4 +213,30 @@ func get_move_state():
 	is_sliding = Input.is_action_just_pressed("move_crouch") && !is_zero_approx(velocity.x)
 	is_idling = is_on_floor() && velocity.x < 1 && !is_crouching || !is_sliding
 
+func save_input_for_replay() -> void:
+	#recodrind starting input
+	if Input.is_action_just_pressed("move_left"): memory.L = frames
+	if Input.is_action_just_pressed("move_right"): memory.R = frames
+	if Input.is_action_just_pressed("move_jump"): memory.J = frames
+	if Input.is_action_just_pressed("move_crouch"): memory.C = frames
+	
+	#recording end input
+	#this is the actual array we will use for replays
+	#grappling hook stuff is recorded in the input event function
+	if Input.is_action_just_released("move_left"): replay.append({"key":"L", "start_frame":self.memory.L, "end_frame":self.frames})
+	if Input.is_action_just_released("move_right"): replay.append({"key":"R", "start_frame":self.memory.L, "end_frame":self.frames})
+	if Input.is_action_just_released("move_jump"): replay.append({"key":"J", "start_frame":self.memory.L, "end_frame":self.frames})
+	if Input.is_action_just_released("move_crouch"): replay.append({"key":"C", "start_frame":self.memory.L, "end_frame":self.frames})
 
+func save_replay() -> void:
+	var file = File.new()
+	#replays will be saved as replay-0.rp replay-1.rp etc
+	file.open(str("replay-", replay_index, ".owo"), File.WRITE)
+	file.store_var(replay)
+	file.close()
+
+
+func _on_Player_kill_player():
+	save_replay()
+	replay_index += 1
+	pass # Replace with function body.

@@ -27,7 +27,7 @@ position = Vector2( 714, 263 )
 position = Vector2( 93, 331 )
 
 [node name="DeathZone" parent="." instance=ExtResource( 5 )]
-position = Vector2( -165, 732 )
+position = Vector2( 437, 413 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
 shape = SubResource( 1 )
