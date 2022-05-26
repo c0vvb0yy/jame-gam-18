@@ -34,6 +34,8 @@ onready var sprite = $Sprite
 var has_grappling_hook = true
 var grappling_hook
 
+var player_ping = preload("res://src/PlayerPing.tscn")
+
 
 func _ready():
 	if(has_grappling_hook):
@@ -63,12 +65,22 @@ func _input(event: InputEvent) -> void:
 		input = 0 if !left else -1
 	if event.is_action_released("move_left"):
 		input = 1 if !left else 0
-
-	if event.is_action_pressed("grapple_shoot"):
-		grappling_hook.shoot(get_global_mouse_position() - self.global_position )#+ get_viewport().size * 0.5)
-	elif event.is_action_released("grapple_shoot"):
-		grappling_hook.release()
-
+	
+	if GameData.allow_grappling_hook:
+		if event.is_action_pressed("grapple_shoot"):
+			grappling_hook.shoot(get_global_mouse_position() - self.global_position )#+ get_viewport().size * 0.5)
+		elif event.is_action_released("grapple_shoot"):
+			grappling_hook.release()
+	
+	if GameData.allow_ping:
+		if event.is_action_pressed("ping"):
+			
+			var controllers = get_tree().get_nodes_in_group("ArenaController")
+			if controllers.size() > 0:
+				var controller = controllers[0]
+				var new_ping = player_ping.instance()
+				new_ping.global_position = global_position
+				controller.add_child(new_ping)
 
 func _process(delta: float) -> void:
 	update_player_sprite()
@@ -172,7 +184,7 @@ func update_player_sprite():
 		sprite.scale.x = orientation
 	
 	if is_crouching && is_on_floor():
-		sprite.rotation_degrees = orientation * 15
+		sprite.rotation_degrees = orientation * -15
 	else:
 		sprite.rotation_degrees = 0
 

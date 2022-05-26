@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/level/editor/PlayerSpawnPoint.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/level/editor/TileSet.tres" type="TileSet" id=3]
 [ext_resource path="res://src/level/arenas/Arena.gd" type="Script" id=4]
 [ext_resource path="res://src/level/editor/PlayerGoal.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/fonts/objects/arena_actual.tres" type="DynamicFont" id=6]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 4 )
@@ -27,3 +28,24 @@ tile_data = PoolIntArray( -262148, 1, 0, -262147, 1, 1, -262146, 1, 1, -262145, 
 
 [node name="PlayerGoal" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1166, 244 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 21.0
+margin_top = 656.0
+margin_right = 593.0
+margin_bottom = 703.0
+custom_fonts/font = ExtResource( 6 )
+text = "jump while next to a wall to
+perform a wall jump"
+align = 1
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 391.0
+margin_top = 206.0
+margin_right = 963.0
+margin_bottom = 278.0
+custom_fonts/font = ExtResource( 6 )
+text = "use S or CTRL while moving to slide
+-
+jump while sliding to go really far"
+align = 1

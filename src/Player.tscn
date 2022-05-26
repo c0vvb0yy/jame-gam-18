@@ -44,6 +44,7 @@ position = Vector2( 0.648071, -0.698273 )
 shape = SubResource( 4 )
 
 [node name="GrapplingHook" parent="PlayerMovement" instance=ExtResource( 6 )]
+position = Vector2( 0, -9 )
 speed = 89
 
 [node name="Camera2D" type="Camera2D" parent="PlayerMovement"]

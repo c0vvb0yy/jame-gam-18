@@ -5,8 +5,8 @@
 [ext_resource path="res://src/GrapplingHook.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 4.0
-height = 8.35
+radius = 3.0
+height = 2.35
 
 [node name="GrapplingHook" type="Node2D"]
 script = ExtResource( 3 )
@@ -27,5 +27,5 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, 7.073 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hook"]
-position = Vector2( 0, 6.175 )
+position = Vector2( 0, 3 )
 shape = SubResource( 1 )
