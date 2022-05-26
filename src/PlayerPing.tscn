@@ -13,7 +13,7 @@ animations = [ {
 "speed": 1.0
 } ]
 
-[node name="PlayerPing" type="Node2D"]
+[node name="PlayerPing" type="Node2D" groups=["PlayerPing"]]
 script = ExtResource( 1 )
 
 [node name="PingBody" type="AnimatedSprite" parent="."]

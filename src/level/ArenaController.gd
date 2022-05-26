@@ -26,6 +26,9 @@ func load_arena(arena_index: int):
 	for c in get_children():
 		if c.has_method("player_spawn_point_global_coords"):
 			c.queue_free()
+			
+	for ping in get_tree().get_nodes_in_group("PlayerPing"):
+		ping.queue_free()
 	
 	#var file_path = str("res://src/level/arenas/arena", arena_index, ".tscn")
 	# get file path
