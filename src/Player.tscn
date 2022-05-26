@@ -17,7 +17,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 30.4594, 31.4221 )
+extents = Vector2( 11.0172, 13.2671 )
 
 [node name="Player" type="Node2D" groups=["Player"]]
 position = Vector2( 131, 461 )
@@ -35,7 +35,6 @@ region_rect = Rect2( 0, 0, 0, -7.76 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="PlayerMovement"]
 z_index = 1
 frames = SubResource( 5 )
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerMovement"]

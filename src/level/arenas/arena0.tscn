@@ -20,6 +20,9 @@ position = Vector2( 72, 311 )
 position = Vector2( 72, 305 )
 rotation = 3.14159
 
+[node name="AnimatedSprite" parent="Player/PlayerMovement" index="1"]
+frame = 0
+
 [node name="Camera2D" parent="Player/PlayerMovement" index="4"]
 current = true
 
