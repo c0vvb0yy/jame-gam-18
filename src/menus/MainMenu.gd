@@ -4,6 +4,7 @@ extends Control
 enum MenuStates{
 	MainMenu,
 	ArenaSelect,
+	Shop,
 	Credits
 }
 

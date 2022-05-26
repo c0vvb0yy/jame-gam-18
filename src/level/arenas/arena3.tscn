@@ -25,9 +25,9 @@ position = Vector2( 222, 520 )
 [node name="Label" type="Label" parent="."]
 margin_left = 53.0
 margin_top = 385.0
-margin_right = 314.0
+margin_right = 340.0
 margin_bottom = 432.0
 custom_fonts/font = ExtResource( 6 )
-text = "gauge out an eye with Q or SHIFT"
+text = "light one of your EYES with Q or SHIFT"
 align = 1
 autowrap = true

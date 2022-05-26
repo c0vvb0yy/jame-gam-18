@@ -35,8 +35,8 @@ texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 0, -7.811 )
 
 [node name="PlayerIllumination" type="AnimatedSprite" parent="PlayerMovement"]
-z_index = 1
 frames = SubResource( 5 )
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerMovement"]
