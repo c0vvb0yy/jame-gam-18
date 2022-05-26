@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/PlayerMovement.gd" type="Script" id=2]
 [ext_resource path="res://assets/player/player_character.png" type="Texture" id=3]
 [ext_resource path="res://assets/player/illum640000.png" type="Texture" id=4]
 [ext_resource path="res://assets/player/illum640001.png" type="Texture" id=5]
+[ext_resource path="res://src/GrapplingHook.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Camera.gd" type="Script" id=7]
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
@@ -26,19 +28,21 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="PlayerMovement"]
 position = Vector2( 3.05176e-05, -0.698273 )
-scale = Vector2( 0.415877, 0.431934 )
 z_index = 3
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 0, -7.76 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="PlayerMovement"]
-scale = Vector2( 1, 1 )
 z_index = 1
 frames = SubResource( 5 )
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerMovement"]
 position = Vector2( 0.648071, -0.698273 )
-scale = Vector2( 1, 1 )
 shape = SubResource( 4 )
+
+[node name="GrapplingHook" parent="PlayerMovement" instance=ExtResource( 6 )]
+speed = 50
+
+[node name="Camera2D" type="Camera2D" parent="PlayerMovement"]
+script = ExtResource( 7 )

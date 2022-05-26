@@ -7,10 +7,12 @@ export var gravity : int = 2500
 export var max_slide_force : int = 600
 export var jump_impulse_x = 140
 export var ground_slam_impuse_y = 1500
+export var grappling_pull = 105
 
-var jumps_made = 0;
-var slide_force = 0;
-var velocity = Vector2.ZERO;
+var jumps_made = 0
+var slide_force = 0
+var velocity = Vector2.ZERO
+var chain_velocity = Vector2.ZERO
 
 #move state vars
 var is_falling : bool
@@ -27,8 +29,14 @@ var direction = Vector2.ZERO
 var slide_decay = 15
 
 onready var sprite = $Sprite
+
+var has_grappling_hook = true
+var grappling_hook
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if(has_grappling_hook):
+		grappling_hook = $GrapplingHook
 	pass # Replace with function body.
 
 
@@ -51,37 +59,16 @@ func _input(event: InputEvent) -> void:
 		input = 0
 	
 
-#	if event.is_action("move_left"):
-#		#input = -1
-#		left = true
-#
-#
-#	if event.is_action("move_right"):
-#		#input = 1
-#		left = false
-#
-#	if left:
-#		input = -1
-#	else:
-#		input = 1
-#
 	if event.is_action_released("move_right"):
 		input = 0 if !left else -1
 	if event.is_action_released("move_left"):
 		input = 1 if !left else 0
-#
-#
-#
-#	if event.is_action("move_left") && event.is_action("move_right"):
-#		input = 0
-		
-		
-	
-#	if event.is_action_released("move_right") && event.is_action("move_left"):
-#		input = -1
-#	if event.is_action_released("move_left") && event.is_action("move_right"):
-#		input = 1
-	
+
+	if event.is_action_pressed("grapple_shoot"):
+		grappling_hook.shoot(get_global_mouse_position() - self.global_position )#+ get_viewport().size * 0.5)
+	elif event.is_action_released("grapple_shoot"):
+		grappling_hook.release()
+
 	
 
 func _physics_process(delta):
@@ -135,10 +122,25 @@ func _physics_process(delta):
 			# ground slam
 			velocity.y = ground_slam_impuse_y
 	
+	if grappling_hook.is_hooked:
+		chain_velocity = grappling_hook.hook.position.normalized() * -grappling_pull
+#		if chain_velocity.y > 0:
+#			#pulling down isnt as strong
+#			chain_velocity.y *= 0.55
+#		else:
+#			#pulling up is stronger
+#			chain_velocity.y *= 500
+#		if sign(chain_velocity.x) != sign(input):
+#			#if we are going in a different direction than the chain is pulling us
+#			#reduce the pull
+#			chain_velocity.x *= 0.7
+	else:
+		chain_velocity = Vector2.ZERO
+	
+	velocity += chain_velocity
+	
 	velocity = move_and_slide(velocity, Vector2.UP)
-	#print(is_sliding)
-	#print(slide_force)
-	#print(str("jumps ", jumps_made, " / ", max_jumps))
+
 
 func jump():
 	velocity.y = -jump_strength
