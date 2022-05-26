@@ -43,7 +43,8 @@ func create_level_items():
 	# remove all levels so far
 	for child in arena_container.get_children():
 		if child is HBoxContainer:
-			child.queue_free()
+			if !child.is_in_group("Heading"):
+				child.queue_free()
 	
 	# create vars
 	var current_button_count = 0
