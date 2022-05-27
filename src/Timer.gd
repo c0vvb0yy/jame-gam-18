@@ -14,6 +14,9 @@ func _process(delta):
 	
 	label.text = format_time()
 
+func get_seconds() -> float:
+	return fmod(elapsed_time, 60)
+
 func format_time() -> String:
 	var minutes = elapsed_time / 60
 	var seconds = fmod(elapsed_time, 60)

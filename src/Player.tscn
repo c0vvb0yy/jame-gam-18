@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/PlayerMovement.gd" type="Script" id=2]
@@ -10,6 +10,25 @@
 [ext_resource path="res://src/level/VictoryContainer.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Timer.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/VHSEffect.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/explosion_img_seq/frame_15_delay-0.1s.png" type="Texture" id=11]
+[ext_resource path="res://assets/explosion_img_seq/frame_04_delay-0.1s.png" type="Texture" id=12]
+[ext_resource path="res://assets/explosion_img_seq/frame_14_delay-0.1s.png" type="Texture" id=13]
+[ext_resource path="res://assets/explosion_img_seq/frame_16_delay-0.1s.png" type="Texture" id=14]
+[ext_resource path="res://assets/explosion_img_seq/frame_05_delay-0.1s.png" type="Texture" id=15]
+[ext_resource path="res://assets/explosion_img_seq/frame_10_delay-0.1s.png" type="Texture" id=16]
+[ext_resource path="res://assets/explosion_img_seq/frame_08_delay-0.1s.png" type="Texture" id=17]
+[ext_resource path="res://assets/explosion_img_seq/frame_07_delay-0.1s.png" type="Texture" id=18]
+[ext_resource path="res://assets/explosion_img_seq/frame_09_delay-0.1s.png" type="Texture" id=19]
+[ext_resource path="res://assets/explosion_img_seq/frame_11_delay-0.1s.png" type="Texture" id=20]
+[ext_resource path="res://assets/explosion_img_seq/frame_12_delay-0.1s.png" type="Texture" id=21]
+[ext_resource path="res://assets/explosion_img_seq/frame_13_delay-0.1s.png" type="Texture" id=22]
+[ext_resource path="res://assets/explosion_img_seq/frame_06_delay-0.1s.png" type="Texture" id=23]
+[ext_resource path="res://assets/explosion_img_seq/frame_03_delay-0.1s.png" type="Texture" id=24]
+[ext_resource path="res://assets/explosion_img_seq/frame_00_delay-0.1s.png" type="Texture" id=25]
+[ext_resource path="res://assets/explosion_img_seq/frame_02_delay-0.1s.png" type="Texture" id=26]
+[ext_resource path="res://assets/explosion_img_seq/frame_01_delay-0.1s.png" type="Texture" id=27]
+[ext_resource path="res://assets/player/player_eye.png" type="Texture" id=28]
+[ext_resource path="res://assets/fonts/objects/arena_text2.tres" type="DynamicFontData" id=29]
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
@@ -22,9 +41,20 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 11.0172, 13.2671 )
 
+[sub_resource type="DynamicFont" id=7]
+font_data = ExtResource( 29 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ ExtResource( 18 ), ExtResource( 17 ), ExtResource( 19 ), ExtResource( 16 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 13 ), ExtResource( 11 ), ExtResource( 14 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 26 ), ExtResource( 24 ), ExtResource( 12 ), ExtResource( 15 ), ExtResource( 23 ), ExtResource( 18 ) ],
+"loop": false,
+"name": "default",
+"speed": 12.0
+} ]
+
 [node name="Player" type="Node2D" groups=["Player"]]
 position = Vector2( 131, 461 )
-z_index = 1
+z_index = 5
 script = ExtResource( 1 )
 
 [node name="PlayerMovement" type="KinematicBody2D" parent="."]
@@ -62,7 +92,45 @@ margin_bottom = 270.0
 [node name="Timer" parent="PlayerMovement/Camera2D" instance=ExtResource( 9 )]
 position = Vector2( -507, -301 )
 
-[node name="TextureRect" parent="PlayerMovement/Camera2D" instance=ExtResource( 10 )]
+[node name="Label" parent="PlayerMovement/Camera2D/Timer" index="0"]
+text = "1"
+
+[node name="VHSEffect" parent="PlayerMovement/Camera2D" instance=ExtResource( 10 )]
+visible = false
 position = Vector2( -512, -300 )
+z_index = 6
+
+[node name="CenterContainer" type="VBoxContainer" parent="PlayerMovement/Camera2D"]
+margin_left = -510.0
+margin_top = -274.0
+margin_right = -476.0
+margin_bottom = -252.0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerMovement/Camera2D/CenterContainer"]
+margin_right = 34.0
+margin_bottom = 22.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PlayerMovement/Camera2D/CenterContainer/HBoxContainer"]
+margin_left = 1.0
+margin_right = 17.0
+margin_bottom = 22.0
+texture = ExtResource( 28 )
+
+[node name="EyeCounter" type="Label" parent="PlayerMovement/Camera2D/CenterContainer/HBoxContainer"]
+margin_left = 21.0
+margin_right = 33.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 7 )
+text = "2"
+
+[node name="DeathExplosion" type="AnimatedSprite" parent="PlayerMovement"]
+position = Vector2( 1, -12 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 20
+frames = SubResource( 6 )
+
+[connection signal="kill_player" from="." to="PlayerMovement" method="_on_Player_kill_player"]
 
 [editable path="PlayerMovement/Camera2D/Timer"]

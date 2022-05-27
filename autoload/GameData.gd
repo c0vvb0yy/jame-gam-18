@@ -8,10 +8,11 @@ const ARENA_ORDER = [
 	"res://src/level/arenas/arena2-1.tscn",
 	"res://src/level/arenas/arena3.tscn",
 	"res://src/level/arenas/arena3-0-1.tscn",
-	"res://src/level/arenas/arena3-1.tscn"
+	"res://src/level/arenas/arena3-1.tscn",
+	"res://src/level/arenas/arena4.tscn"
 ]
 
-var next_arena = 0 # var used in the main menu button selection to tell the arena controller which arena to load first
+var next_arena = 7 # var used in the main menu button selection to tell the arena controller which arena to load first
 
 
 var allow_grappling_hook = true
