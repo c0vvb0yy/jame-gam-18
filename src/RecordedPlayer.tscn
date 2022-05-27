@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/RecordedPlayerMovement.gd" type="Script" id=2]
+[ext_resource path="res://assets/player/player_character.png" type="Texture" id=3]
+[ext_resource path="res://assets/player/illum640000.png" type="Texture" id=4]
+[ext_resource path="res://assets/player/illum640001.png" type="Texture" id=5]
+[ext_resource path="res://src/GrapplingHook.tscn" type="PackedScene" id=6]
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 11.0172, 13.2671 )
+
+[node name="RecordedPlayer" type="Node2D" groups=["Player"]]
+position = Vector2( 131, 461 )
+z_index = 1
+
+[node name="RecordedPlayerMovement" type="KinematicBody2D" parent="."]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="RecordedPlayerMovement"]
+z_index = 3
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 0, -7.811 )
+
+[node name="PlayerIllumination" type="AnimatedSprite" parent="RecordedPlayerMovement"]
+z_index = 1
+frames = SubResource( 5 )
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RecordedPlayerMovement"]
+position = Vector2( 0.648071, -0.698273 )
+shape = SubResource( 4 )
+
+[node name="GrapplingHook" parent="RecordedPlayerMovement" instance=ExtResource( 6 )]
+position = Vector2( 0, -9 )
+speed = 89

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/PlayerMovement.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/GrapplingHook.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Camera.gd" type="Script" id=7]
 [ext_resource path="res://src/level/VictoryContainer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/Timer.tscn" type="PackedScene" id=9]
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
@@ -57,3 +58,10 @@ margin_left = 236.0
 margin_top = 174.0
 margin_right = 468.0
 margin_bottom = 270.0
+
+[node name="Timer" parent="PlayerMovement/Camera2D" instance=ExtResource( 9 )]
+position = Vector2( -507, -301 )
+
+[connection signal="kill_player" from="." to="PlayerMovement" method="_on_Player_kill_player"]
+
+[editable path="PlayerMovement/Camera2D/Timer"]
