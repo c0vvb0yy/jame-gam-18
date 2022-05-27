@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/level/editor/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://src/level/editor/PlayerSpawnPoint.tscn" type="PackedScene" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://src/level/editor/DeathZone.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/level/editor/PlayerGoal.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/fonts/objects/arena_actual.tres" type="DynamicFont" id=7]
-[ext_resource path="res://src/VHSEffect.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 66.0
@@ -21,9 +20,8 @@ allow_ping = false
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 95, 331 )
 
-[node name="TextureRect" parent="Player/PlayerMovement/Camera2D" index="2" instance=ExtResource( 8 )]
-position = Vector2( -512, -300 )
-z_index = 10
+[node name="PlayerIllumination" parent="Player/PlayerMovement" index="1"]
+frame = 1
 
 [node name="PlayerGoal" parent="." instance=ExtResource( 6 )]
 position = Vector2( 714, 263 )

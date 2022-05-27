@@ -63,9 +63,11 @@ margin_bottom = 270.0
 [node name="Timer" parent="PlayerMovement/Camera2D" instance=ExtResource( 9 )]
 position = Vector2( -507, -301 )
 
-[node name="VHSEffect" parent="." instance=ExtResource( 10 )]
+[node name="VHSEffect" parent="PlayerMovement/Camera2D" instance=ExtResource( 10 )]
 visible = false
 position = Vector2( -512, -300 )
 z_index = 6
+
+[connection signal="kill_player" from="." to="PlayerMovement" method="_on_Player_kill_player"]
 
 [editable path="PlayerMovement/Camera2D/Timer"]

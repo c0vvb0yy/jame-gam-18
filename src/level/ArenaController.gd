@@ -66,6 +66,7 @@ func show_victory_screen():
 	print("you won")
 
 func end_run():
+	get_player_ref()
 	position_player_at_spawn()
 	pass
 	# stop recording
