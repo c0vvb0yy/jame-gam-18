@@ -6,7 +6,7 @@ signal kill_player
 
 onready var victory_container = $PlayerMovement/Camera2D/VictoryContainer
 onready var body = $PlayerMovement
-onready var vis_effect = $VHSEffect
+onready var vis_effect = $PlayerMovement/Camera2D/VHSEffect
 var spawn_pos : Vector2
 
 func _ready():
