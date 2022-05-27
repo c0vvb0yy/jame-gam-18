@@ -9,11 +9,13 @@ export var jump_impulse_x = 140
 export var ground_slam_impuse_y = 1500
 export var grappling_pull = 105
 export var mid_air_control = 30
+export var max_pings = 2
 
 var jumps_made = 0
 var slide_force = 0
 var velocity = Vector2.ZERO
 var chain_velocity = Vector2.ZERO
+var run_pings = 0
 
 #move state vars
 var is_falling : bool
@@ -86,13 +88,15 @@ func _input(event: InputEvent) -> void:
 	
 	if GameData.allow_ping:
 		if event.is_action_pressed("ping"):
-			memory.P = frames
-			var controllers = get_tree().get_nodes_in_group("ArenaController")
-			if controllers.size() > 0:
-				var controller = controllers[0]
-				var new_ping = player_ping.instance()
-				new_ping.global_position = global_position
-				controller.add_child(new_ping)
+			print(run_pings)
+			if run_pings < max_pings:
+				var controllers = get_tree().get_nodes_in_group("ArenaController")
+				if controllers.size() > 0:
+					var controller = controllers[0]
+					var new_ping = player_ping.instance()
+					new_ping.global_position = global_position
+					controller.add_child(new_ping)
+				run_pings += 1
 
 func _process(delta: float) -> void:
 	update_player_sprite()
@@ -254,9 +258,5 @@ func create_ghost():
 		controller.add_child(new_ghost)
 	pass
 
-#func _on_Player_kill_player():
-#	save_replay()
-#	clear_memory()
-#	create_ghost()
-#	replay_index += 1
-#	pass # Replace with function body.
+func _on_Player_kill_player():
+	run_pings = 0

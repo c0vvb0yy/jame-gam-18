@@ -92,10 +92,11 @@ position = Vector2( 1, -12 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 20
 frames = SubResource( 6 )
-
-[node name="VHSEffect" parent="." instance=ExtResource( 10 )]
+[node name="VHSEffect" parent="PlayerMovement/Camera2D" instance=ExtResource( 10 )]
 visible = false
 position = Vector2( -512, -300 )
 z_index = 6
+
+[connection signal="kill_player" from="." to="PlayerMovement" method="_on_Player_kill_player"]
 
 [editable path="PlayerMovement/Camera2D/Timer"]
