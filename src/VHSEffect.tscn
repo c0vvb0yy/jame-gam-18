@@ -15,7 +15,7 @@ shader_param/noise_texture = ExtResource( 3 )
 shader_param/noisier_texture = ExtResource( 1 )
 shader_param/scanlines_texture = ExtResource( 4 )
 
-[node name="TextureRect" type="Sprite"]
+[node name="VHSEffect" type="Sprite"]
 material = SubResource( 2 )
 texture = ExtResource( 5 )
 centered = false
