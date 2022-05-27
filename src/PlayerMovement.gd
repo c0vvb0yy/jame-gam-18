@@ -32,6 +32,7 @@ var direction = Vector2.ZERO
 var slide_decay = 15
 
 onready var sprite = $Sprite
+onready var eye_counter = $Camera2D/CenterContainer/HBoxContainer/EyeCounter
 
 var grappling_hook
 
@@ -50,6 +51,7 @@ func _ready():
 	frames = 0
 	replay_index = 0
 	start_pos = self.global_position
+	eye_counter.text = str(max_pings)
 	grappling_hook = $GrapplingHook
 
 
@@ -88,7 +90,6 @@ func _input(event: InputEvent) -> void:
 	
 	if GameData.allow_ping:
 		if event.is_action_pressed("ping"):
-			print(run_pings)
 			if run_pings < max_pings:
 				var controllers = get_tree().get_nodes_in_group("ArenaController")
 				if controllers.size() > 0:
@@ -97,6 +98,7 @@ func _input(event: InputEvent) -> void:
 					new_ping.global_position = global_position
 					controller.add_child(new_ping)
 				run_pings += 1
+				eye_counter.text = str(max_pings - run_pings)
 
 func _process(delta: float) -> void:
 	update_player_sprite()

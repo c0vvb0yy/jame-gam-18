@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/PlayerMovement.gd" type="Script" id=2]
@@ -27,6 +27,8 @@
 [ext_resource path="res://assets/explosion_img_seq/frame_00_delay-0.1s.png" type="Texture" id=25]
 [ext_resource path="res://assets/explosion_img_seq/frame_02_delay-0.1s.png" type="Texture" id=26]
 [ext_resource path="res://assets/explosion_img_seq/frame_01_delay-0.1s.png" type="Texture" id=27]
+[ext_resource path="res://assets/player/player_eye.png" type="Texture" id=28]
+[ext_resource path="res://assets/fonts/objects/arena_text2.tres" type="DynamicFontData" id=29]
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
@@ -38,6 +40,9 @@ animations = [ {
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 11.0172, 13.2671 )
+
+[sub_resource type="DynamicFont" id=7]
+font_data = ExtResource( 29 )
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
@@ -87,15 +92,44 @@ margin_bottom = 270.0
 [node name="Timer" parent="PlayerMovement/Camera2D" instance=ExtResource( 9 )]
 position = Vector2( -507, -301 )
 
+[node name="Label" parent="PlayerMovement/Camera2D/Timer" index="0"]
+text = "1"
+
+[node name="VHSEffect" parent="PlayerMovement/Camera2D" instance=ExtResource( 10 )]
+visible = false
+position = Vector2( -512, -300 )
+z_index = 6
+
+[node name="CenterContainer" type="VBoxContainer" parent="PlayerMovement/Camera2D"]
+margin_left = -510.0
+margin_top = -274.0
+margin_right = -476.0
+margin_bottom = -252.0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerMovement/Camera2D/CenterContainer"]
+margin_right = 34.0
+margin_bottom = 22.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PlayerMovement/Camera2D/CenterContainer/HBoxContainer"]
+margin_left = 1.0
+margin_right = 17.0
+margin_bottom = 22.0
+texture = ExtResource( 28 )
+
+[node name="EyeCounter" type="Label" parent="PlayerMovement/Camera2D/CenterContainer/HBoxContainer"]
+margin_left = 21.0
+margin_right = 33.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 7 )
+text = "2"
+
 [node name="DeathExplosion" type="AnimatedSprite" parent="PlayerMovement"]
 position = Vector2( 1, -12 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 20
 frames = SubResource( 6 )
-[node name="VHSEffect" parent="PlayerMovement/Camera2D" instance=ExtResource( 10 )]
-visible = false
-position = Vector2( -512, -300 )
-z_index = 6
 
 [connection signal="kill_player" from="." to="PlayerMovement" method="_on_Player_kill_player"]
 
