@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/PlayerMovement.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/Camera.gd" type="Script" id=7]
 [ext_resource path="res://src/level/VictoryContainer.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Timer.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/VHSEffect.tscn" type="PackedScene" id=10]
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
@@ -37,7 +38,6 @@ region_rect = Rect2( 0, 0, 0, -7.811 )
 
 [node name="PlayerIllumination" type="AnimatedSprite" parent="PlayerMovement"]
 frames = SubResource( 5 )
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerMovement"]
@@ -61,6 +61,9 @@ margin_bottom = 270.0
 
 [node name="Timer" parent="PlayerMovement/Camera2D" instance=ExtResource( 9 )]
 position = Vector2( -507, -301 )
+
+[node name="TextureRect" parent="PlayerMovement/Camera2D" instance=ExtResource( 10 )]
+position = Vector2( -512, -300 )
 
 [connection signal="kill_player" from="." to="PlayerMovement" method="_on_Player_kill_player"]
 

@@ -16,12 +16,10 @@ height = 78.0
 [node name="Arena" type="Node2D"]
 script = ExtResource( 4 )
 allow_grappling_hook = false
+allow_ping = false
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 95, 331 )
-
-[node name="PlayerIllumination" parent="Player/PlayerMovement" index="1"]
-frame = 0
 
 [node name="TextureRect" parent="Player/PlayerMovement/Camera2D" index="2" instance=ExtResource( 8 )]
 position = Vector2( -512, -300 )

@@ -16,9 +16,9 @@ func get_player_ref():
 		current_player = players[0]
 		# assign the first player we find to the referencee
 		# depending on how we implement the replay, this may have to be refactored
-	else:
-		var new_player = player.instance()
-		current_player = new_player
+#	else:
+#		var new_player = player.instance()
+#		current_player = new_player
 
 func load_arena(arena_index: int):
 	# trash all other arenas here

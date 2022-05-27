@@ -38,7 +38,7 @@ var recorded_player = preload("res://src/RecordedPlayer.tscn")
 
 #replay vars
 var replay = [] #array of dicts that store button input press, begging and end
-var memory = {"L":0, "R":0, "J":0, "C":0, "H":0, "P": 0} #dictionary to hold input and when pressed
+var memory = {"L":0, "R":0, "J":0, "C":0, "H":[0,0], "P": 0} #dictionary to hold input and when pressed
 var frames = 0
 var replay_index = 0
 
@@ -48,8 +48,7 @@ func _ready():
 	frames = 0
 	replay_index = 0
 	start_pos = self.global_position
-	if GameData.allow_grappling_hook:
-		grappling_hook = $GrapplingHook
+	grappling_hook = $GrapplingHook
 
 
 func _input(event: InputEvent) -> void:
@@ -79,11 +78,11 @@ func _input(event: InputEvent) -> void:
 	if GameData.allow_grappling_hook:
 		if event.is_action_pressed("grapple_shoot"):
 			grappling_hook.shoot(get_global_mouse_position() - self.global_position )#+ get_viewport().size * 0.5)
-			if !grappling_hook.is_flying && memory.H == 0: #saving the first frame where the grappling hook is hooked
-				memory.H = [frames, grappling_hook.hook_pos] #saving the start frame of being hooked and the pos where to get pulled to
+#			if grappling_hook.is_hooked && memory.H == 0: #saving the first frame where the grappling hook is hooked
+#				memory.H = [frames, grappling_hook.hook_pos] #saving the start frame of being hooked and the pos where to get pulled to
 		elif event.is_action_released("grapple_shoot"):
 			grappling_hook.release()
-			replay.append({"key":"H", "start_frame":self.memory.H[0], "end_frame": self.frames, "hook_pos": self.memory.H[1]})
+			#replay.append({"key":"H", "start_frame":self.memory.H[0], "end_frame": self.frames, "hook_pos": self.memory.H[1]})
 	
 	if GameData.allow_ping:
 		if event.is_action_pressed("ping"):
@@ -102,7 +101,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta):
 	
-	save_input_for_replay()
+	#save_input_for_replay()
 	
 	if is_sliding:
 		slide_force = max_slide_force
@@ -154,20 +153,21 @@ func _physics_process(delta):
 			velocity.y = ground_slam_impuse_y
 	
 	chain_velocity = Vector2.ZERO
-	if grappling_hook.is_hooked:
-		chain_velocity = grappling_hook.hook.position.normalized() * -grappling_pull
-		if chain_velocity.y > 0:
-			#pulling down isnt as strong
-			chain_velocity.y *= 0.55
+	if grappling_hook != null:
+		if grappling_hook.is_hooked:
+			chain_velocity = grappling_hook.hook.position.normalized() * -grappling_pull
+			if chain_velocity.y > 0:
+				#pulling down isnt as strong
+				chain_velocity.y *= 0.55
+			else:
+				#pulling up is stronger
+				chain_velocity.y *= 3.00
+			if sign(chain_velocity.x) != sign(input):
+				#if we are going in a different direction than the chain is pulling us
+				# increase the pull so that we go towards the hook
+				chain_velocity.x *= 1.5
 		else:
-			#pulling up is stronger
-			chain_velocity.y *= 3.00
-		if sign(chain_velocity.x) != sign(input):
-			#if we are going in a different direction than the chain is pulling us
-			# increase the pull so that we go towards the hook
-			chain_velocity.x *= 1.5
-	else:
-		chain_velocity = Vector2.ZERO
+			chain_velocity = Vector2.ZERO
 	
 	if chain_velocity != Vector2.ZERO:
 		velocity = chain_velocity * -5
@@ -254,9 +254,9 @@ func create_ghost():
 		controller.add_child(new_ghost)
 	pass
 
-func _on_Player_kill_player():
-	save_replay()
-	clear_memory()
-	create_ghost()
-	replay_index += 1
-	pass # Replace with function body.
+#func _on_Player_kill_player():
+#	save_replay()
+#	clear_memory()
+#	create_ghost()
+#	replay_index += 1
+#	pass # Replace with function body.

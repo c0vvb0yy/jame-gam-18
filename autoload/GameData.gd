@@ -11,7 +11,7 @@ const ARENA_ORDER = [
 	"res://src/level/arenas/arena3-1.tscn"
 ]
 
-var next_arena = 4 # var used in the main menu button selection to tell the arena controller which arena to load first
+var next_arena = 0 # var used in the main menu button selection to tell the arena controller which arena to load first
 
 
 var allow_grappling_hook = true
