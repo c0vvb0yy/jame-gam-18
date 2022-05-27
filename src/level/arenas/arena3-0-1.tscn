@@ -9,6 +9,14 @@
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 6 )
+time_S = 10.0
+time_A = 12.0
+time_B = 18.0
+time_C = 24.0
+ping_S = 2
+ping_A = 4
+ping_B = 7
+ping_C = 10
 
 [node name="PlayerGoal" parent="." instance=ExtResource( 1 )]
 position = Vector2( 2265, 198 )
@@ -28,10 +36,13 @@ margin_top = 48.0
 margin_right = 979.0
 margin_bottom = 220.0
 custom_fonts/font = ExtResource( 5 )
-text = "we will play a CLIP of your previous attempts during successive runs
+text = "we watch
 -
-your specters' EYES will persist
+your eyes will remain
 -
-press R to restart"
+press R to rewind the CLIP
+
+
+"
 align = 1
 autowrap = true

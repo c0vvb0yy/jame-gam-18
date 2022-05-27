@@ -9,6 +9,14 @@
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 5 )
+time_S = 6.0
+time_A = 9.0
+time_B = 18.0
+time_C = 27.0
+ping_S = 1
+ping_A = 2
+ping_B = 4
+ping_C = 8
 
 [node name="PlayerGoal" parent="." instance=ExtResource( 1 )]
 position = Vector2( -454, 385 )
