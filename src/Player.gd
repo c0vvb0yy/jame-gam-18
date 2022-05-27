@@ -6,11 +6,14 @@ signal kill_player
 
 onready var victory_container = $PlayerMovement/Camera2D/VictoryContainer
 onready var body = $PlayerMovement
+onready var vis_effect = $VHSEffect
 var spawn_pos : Vector2
+
+func _ready():
+	vis_effect.visible = true
 
 func set_victory_container_visible(visibility: bool):
 	victory_container.visible = visibility
-
 
 func kill_player():
 	# get the arena controller
