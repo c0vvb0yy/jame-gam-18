@@ -51,7 +51,7 @@ func load_arena(arena_index: int):
 		
 		# place player there
 		get_player_ref()
-		add_child(current_player)
+		#add_child(current_player)
 		position_player_at_spawn()
 		# idk create the starting state of the player
 
