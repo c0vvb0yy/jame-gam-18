@@ -15,6 +15,16 @@ func _ready():
 func set_victory_container_visible(visibility: bool):
 	victory_container.visible = visibility
 
+func disable_movement():
+	body.set_process(false)
+	body.set_physics_process(false)
+	body.set_process_input(false)
+
+func enable_movement():
+	body.set_process(true)
+	body.set_physics_process(true)
+	body.set_process_input(true)
+
 func kill_player():
 	# get the arena controller
 	var controllers = get_tree().get_nodes_in_group("ArenaController")
@@ -26,3 +36,4 @@ func kill_player():
 		emit_signal("kill_player")
 		disconnect("kill_player", controller, "end_run")
 	body.position = spawn_pos
+	enable_movement()
