@@ -25,7 +25,9 @@ func _on_DeathZone_body_entered(body: Node) -> void:
 	if body.get_parent() is Player:
 		player = body.get_parent()
 		player.disable_movement()
-		timer.start(1.3)
+		player.play_anim()
+#		player.play_explosion()
+		#timer.start(1.3)
 		
 
 
