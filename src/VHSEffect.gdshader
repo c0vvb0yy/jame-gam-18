@@ -7,7 +7,7 @@ uniform float speed = 4;
 uniform float noise_offset = 0.8;
 
 float sawtooth_funky(float period, float offset){
-	return 2.0*(TIME/sin(TIME*period) - floor(0.5 + TIME/sin(TIME*period))) 
+	return 5.0*(TIME/sin(TIME*period) - floor(0.5 + TIME/sin(TIME*period))) 
 				* 0.5+0.5 + offset;
 }
 
