@@ -37,6 +37,6 @@ margin_right = 960.0
 margin_bottom = 927.0
 custom_fonts/font = ExtResource( 6 )
 text = "
-press R to restart"
+press R to rewind"
 align = 1
 autowrap = true
