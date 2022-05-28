@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/menus/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/ui/button_level_select_hover.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://assets/ui/button_quit_hover.png" type="Texture" id=14]
 [ext_resource path="res://assets/audio/music/634790__timouse__220521-standchen.wav" type="AudioStream" id=15]
 [ext_resource path="res://src/menus/ButtonSFXPlayer.gd" type="Script" id=16]
+[ext_resource path="res://assets/name_banner.png" type="Texture" id=17]
 
 [node name="MainMenu" type="Control" groups=["Arena", "MainMenuController"]]
 mouse_filter = 2
@@ -193,6 +194,10 @@ align = 1
 margin_top = 127.0
 margin_right = 829.0
 margin_bottom = 127.0
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 855, 461 )
+texture = ExtResource( 17 )
 
 [connection signal="button_down" from="MainMenuButtons/LevelSelectButton" to="ButtonSFXPlayer" method="_on_LevelSelectButton_button_down"]
 [connection signal="button_up" from="MainMenuButtons/LevelSelectButton" to="." method="_on_LevelSelectButton_button_up"]
