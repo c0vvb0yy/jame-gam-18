@@ -6,6 +6,7 @@ extends Area2D
 # var b: String = "text"
 
 onready var timer = $Timer
+onready var sfx_player = $AudioStreamPlayer
 
 var player 
 
@@ -28,6 +29,10 @@ func _on_DeathZone_body_entered(body: Node) -> void:
 		player.play_anim()
 #		player.play_explosion()
 		#timer.start(1.3)
+		
+		sfx_player.stream = load(AudioData.SFX_PATHS.get(AudioData.SFXKeys.PlayerDeath))
+		sfx_player.volume_db = AudioData.db_level
+		sfx_player.play(0.4)
 		
 
 

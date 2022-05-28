@@ -2,6 +2,7 @@ extends Node2D
 
 onready var chain = $Chain
 onready var hook = $Hook
+onready var sfx_player = $AudioStreamPlayer2D
 
 var direction : Vector2  #direction in which the hook was shot
 var hook_pos : Vector2  #end pos of the tip, global position 
@@ -15,10 +16,14 @@ func shoot(dir : Vector2) -> void:
 	direction = dir.normalized()
 	is_flying = true
 	hook_pos = self.global_position #reset hook pos to player pos
+	
 
 func release() -> void:
 	is_flying = false
 	is_hooked = false
+	sfx_player.stream = load(AudioData.SFX_PATHS.get(AudioData.SFXKeys.PlayerGrappleRelease))
+	sfx_player.volume_db = AudioData.db_level - 3
+	sfx_player.play(0.00)
 
 #graphics update -> visuals
 func _process(delta):
@@ -39,4 +44,7 @@ func _physics_process(delta):
 		if hook.move_and_collide(direction * speed): #returns true if collided with something
 			is_hooked = true
 			is_flying = false
+			sfx_player.stream = load(AudioData.SFX_PATHS.get(AudioData.SFXKeys.PlayerGrappleHit))
+			sfx_player.volume_db = AudioData.db_level
+			sfx_player.play(0.0)
 	hook_pos = hook.global_position #set hook as starting point for next frame
