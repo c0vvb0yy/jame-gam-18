@@ -9,6 +9,7 @@ enum MenuStates{
 }
 
 onready var music_player = $MusicPlayer
+onready var start_sfx_player = $StartSFXPlayer
 
 var current_menu_state = MenuStates.MainMenu
 
@@ -24,9 +25,15 @@ onready var main_menu_buttons = $MainMenuButtons
 onready var arena_button = $MainMenuButtons/LevelSelectButton
 onready var quit_button = $MainMenuButtons/QuitButton
 onready var credits_container = $CreditsContainer
-
+onready var shop_container = $ShopContainer
 
 func _ready() -> void:
+	# startup sound
+	start_sfx_player.stream = load(AudioData.SFX_PATHS.get(AudioData.SFXKeys.MainMenuLoad))
+	start_sfx_player.volume_db = AudioData.db_level
+	start_sfx_player.play(0.0)
+	
+	# generate level selection
 	create_level_items()
 	set_menu_state(MenuStates.MainMenu)
 	music_player.volume_db = AudioData.db_level
@@ -38,10 +45,12 @@ func set_menu_state(value: int):
 	var is_main_menu = current_menu_state == MenuStates.MainMenu
 	var is_arena_select = current_menu_state == MenuStates.ArenaSelect
 	var is_credits = current_menu_state == MenuStates.Credits
+	var is_shop = current_menu_state == MenuStates.Shop
 	
 	main_menu_buttons.visible = is_main_menu
 	arena_container.visible = is_arena_select
 	credits_container.visible = is_credits
+	shop_container.visible = is_shop
 
 
 func create_level_items():
@@ -95,3 +104,7 @@ func _on_QuitButton_button_up() -> void:
 
 
 
+
+
+func _on_ShopButton_button_up() -> void:
+	set_menu_state(MenuStates.Shop)

@@ -24,4 +24,8 @@ text = "1"
 align = 1
 valign = 1
 
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="button_down" from="." to="." method="_on_ArenaSelectButton_button_down"]
 [connection signal="button_up" from="." to="." method="_on_ArenaSelectButton_button_up"]
+[connection signal="mouse_entered" from="." to="." method="_on_ArenaSelectButton_mouse_entered"]

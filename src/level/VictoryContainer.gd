@@ -2,6 +2,7 @@ extends VBoxContainer
 
 
 onready var next_level_button = $ButtonContainer/NextLevelButton
+onready var sfx_player = $SFXPlayer
 
 func _ready() -> void:
 	visible = false
@@ -15,6 +16,7 @@ func launch_arena(arena_index):
 		controller.load_arena(arena_index)
 
 func _on_NextLevelButton_button_up() -> void:
+	GameData.last_arena = GameData.next_arena
 	var new_arena = GameData.next_arena + 1
 	if new_arena < GameData.ARENA_ORDER.size():
 		GameData.next_arena += 1
@@ -32,24 +34,28 @@ func _on_MainMenuButton_button_up() -> void:
 
 
 func _on_RetryButton_button_up() -> void:
+	GameData.last_arena = GameData.next_arena
 	launch_arena(GameData.next_arena)
 
 
 func _on_MainMenuButton_button_down() -> void:
-	pass # Replace with function body.
+	AudioData.play_button_click(sfx_player)
 
 
 func _on_RetryButton_button_down() -> void:
-	pass # Replace with function body.
+	AudioData.play_button_click(sfx_player)
 
 
 func _on_MainMenuButton_mouse_entered() -> void:
-	pass # Replace with function body.
-
+	AudioData.play_button_hover(sfx_player)
 
 func _on_RetryButton_mouse_entered() -> void:
-	pass # Replace with function body.
+	AudioData.play_button_hover(sfx_player)
 
 
 func _on_NextLevelButton_button_down() -> void:
-	pass # Replace with function body.
+	AudioData.play_button_click(sfx_player)
+
+
+func _on_NextLevelButton_mouse_entered() -> void:
+	AudioData.play_button_hover(sfx_player)

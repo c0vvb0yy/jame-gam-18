@@ -9,6 +9,7 @@ var player = preload("res://src/Player.tscn")
 
 
 onready var music_player = $MusicPlayer
+onready var sfx_player = $SFXPlayer
 
 func _ready() -> void:
 	load_arena(GameData.next_arena)
@@ -24,8 +25,7 @@ func get_player_ref():
 #		current_player = new_player
 
 func load_arena(arena_index: int):
-	
-	
+	# old arena still here
 	
 	
 	
@@ -38,6 +38,9 @@ func load_arena(arena_index: int):
 			
 	for ping in get_tree().get_nodes_in_group("PlayerPing"):
 		ping.queue_free()
+	
+	
+	# old arena is now gone
 	
 	#var file_path = str("res://src/level/arenas/arena", arena_index, ".tscn")
 	# get file path
@@ -91,6 +94,13 @@ func load_arena(arena_index: int):
 		
 		var play_pos = playback_pos if AudioData.last_playback_position == 0.0 else AudioData.last_playback_position
 		music_player.play(play_pos)
+		
+		print(GameData.last_arena)
+		print(GameData.next_arena)
+		if GameData.last_arena != GameData.next_arena:
+			sfx_player.stream = load(AudioData.SFX_PATHS.get(AudioData.SFXKeys.ArenaLoad))
+			sfx_player.volume_db = AudioData.db_level
+			sfx_player.play(0.0)
 
 
 func position_player_at_spawn():
