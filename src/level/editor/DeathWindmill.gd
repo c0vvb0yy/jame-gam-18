@@ -18,6 +18,9 @@ onready var back_hl = $BladesBack/TileMapDeathHL
 onready var top_tr = $BladesTop/TileMapDeath
 onready var top_hl = $BladesTop/TileMapDeathHL
 
+onready var body_tr = $TileMap
+onready var body_hl = $TileMapHL
+
 export var counter_clockwise = false
 
 export var front_blades = true
@@ -25,6 +28,7 @@ export var back_blades = true
 export var top_blades = true
 
 export var highlight_blades = false
+export var highlight_body = true
 
 func _ready() -> void:
 	rotate_windmill()
@@ -46,6 +50,10 @@ func _ready() -> void:
 	back_hl.visible = highlight_blades
 	top_tr.visible = !highlight_blades
 	top_hl.visible = highlight_blades
+	
+	body_tr.visible =  !highlight_body
+	body_hl.visible =  highlight_body
+	
 
 
 func rotate_windmill():
