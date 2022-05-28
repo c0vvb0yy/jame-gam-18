@@ -72,6 +72,22 @@ func load_upgrade_data():
 	for key in upgrade_got_data:
 		actual_data[int(key)] = upgrade_got_data.get(key)
 	upgrade_got_data = actual_data
+	
+	
+	PlayerData.player_money = result.get("player_money")
+	
+	
+	
+	var fuck = result.get("finished_levels")
+	var actual_data_levels = []
+	for entry in fuck:
+		actual_data_levels.append(int(entry))
+	
+	PlayerData.finished_levels = actual_data_levels
+	
+	
+	
+	
 
 
 
@@ -79,6 +95,8 @@ func load_upgrade_data():
 func save_upgrade_data() -> void:
 	var data = {}
 	data["upgrade_got_data"] = upgrade_got_data
+	data["player_money"] = PlayerData.player_money
+	data["finished_levels"] = PlayerData.finished_levels
 	print(data)
 	var save_file = File.new()
 	save_file.open(save_path, File.WRITE)

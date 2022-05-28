@@ -24,8 +24,14 @@ func show_stats(time_taken, pings_used, time_arr, ping_arr) -> void:
 	time_label.text = evaluate_time(time_taken, time_arr)
 	eyes_label.text = evaluate_pings(pings_used, ping_arr)
 	evaluate_money()
-	money_label.text = str("Got ", money_sum, "G")
-	pass
+	money_label.text = str("got ", money_sum, " G")
+	
+	
+	# add the money to the data
+	PlayerData.player_money += money_sum
+	
+	money_label.text += str("\n", PlayerData.player_money, " G total")
+	UpgradeData.save_upgrade_data()
 
 
 func evaluate_time(time_taken, time_arr) -> String:
@@ -38,11 +44,11 @@ func evaluate_time(time_taken, time_arr) -> String:
 	#construct next_rank_string
 	if numerical_rank < 3 :
 		var next_rank = numerical_rank+1
-		var next_rank_string = str("Need ", time_arr[next_rank], " for ", num_to_rank[next_rank], "  rank")
+		var next_rank_string = str("need ", time_arr[next_rank], " s for ", num_to_rank[next_rank], "  rank")
 		next_time_label.visible = true
 		next_time_label.text = next_rank_string
 	time_rank = numerical_rank
-	var time_string = str("Took ", time_taken, "s - ", num_to_rank[numerical_rank], " rank!")
+	var time_string = str("took ", time_taken, " s - ", num_to_rank[numerical_rank], " rank!")
 	return time_string
 
 func evaluate_pings(pings_used, ping_arr) -> String :
@@ -57,9 +63,10 @@ func evaluate_pings(pings_used, ping_arr) -> String :
 	#construct next rank string
 	if numerical_rank < 3:
 		var next_rank = numerical_rank+1
-		var next_rank_string = str("Need ", ping_arr[next_rank], " for ", num_to_rank[next_rank], " rank")
+		var next_rank_string = str("maximum of ", ping_arr[next_rank], " for ", num_to_rank[next_rank], " rank")
 	ping_rank = numerical_rank
-	var ping_string = str("Used ", pings_used, " - ", num_to_rank[numerical_rank], " rank!")
+	var eye_str = "eyes" if pings_used != 1 else "eye"
+	var ping_string = str("used ", pings_used, " ", eye_str, " - ", num_to_rank[numerical_rank], " rank!")
 	return ping_string
 
 func evaluate_money():
@@ -67,3 +74,4 @@ func evaluate_money():
 	var ping_mult = ping_rank + 2
 	money_sum = time_mult * ping_mult
 	
+

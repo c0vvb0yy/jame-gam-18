@@ -78,8 +78,8 @@ func load_arena(arena_index: int):
 		var music_path = ""
 		var playback_pos = 0.0 # this is just to skip silence at the start of some tracks
 		# last level track
-		print(GameData.next_arena)
-		print(GameData.ARENA_ORDER.size())
+		#print(GameData.next_arena)
+		#print(GameData.ARENA_ORDER.size())
 		if GameData.next_arena >= GameData.ARENA_ORDER.size() - 1:
 			music_path = AudioData.MUSIC_PATHS.get(AudioData.MusicKeys.LastLevel)
 			AudioData.last_track = AudioData.MusicKeys.LastLevel
@@ -99,8 +99,8 @@ func load_arena(arena_index: int):
 		var play_pos = playback_pos if AudioData.last_playback_position == 0.0 else AudioData.last_playback_position
 		music_player.play(play_pos)
 		
-		print(GameData.last_arena)
-		print(GameData.next_arena)
+		#print(GameData.last_arena)
+		#print(GameData.next_arena)
 		if GameData.last_arena != GameData.next_arena:
 			sfx_player.stream = load(AudioData.SFX_PATHS.get(AudioData.SFXKeys.ArenaLoad))
 			sfx_player.volume_db = AudioData.db_level
