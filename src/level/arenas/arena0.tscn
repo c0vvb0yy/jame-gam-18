@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/level/editor/TileSet.tres" type="TileSet" id=1]
 [ext_resource path="res://src/level/editor/PlayerSpawnPoint.tscn" type="PackedScene" id=2]
@@ -15,16 +15,6 @@ time_S = 3.0
 time_A = 5.0
 time_B = 10.0
 time_C = 20.0
-
-[node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 95, 331 )
-
-[node name="PlayerIllumination" parent="Player/PlayerMovement" index="1"]
-frame = 1
-
-[node name="TextureRect" parent="Player/PlayerMovement/Camera2D" index="2" instance=ExtResource( 8 )]
-position = Vector2( -512, -300 )
-z_index = 10
 
 [node name="PlayerGoal" parent="." instance=ExtResource( 6 )]
 position = Vector2( 714, 263 )
@@ -60,5 +50,5 @@ text = "use W or SPACE to jump
 you have a double jump"
 align = 1
 
-[editable path="Player"]
-[editable path="Player/PlayerMovement/Camera2D/Timer"]
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 89, 316 )
