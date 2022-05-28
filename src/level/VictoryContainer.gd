@@ -25,8 +25,12 @@ func _on_NextLevelButton_button_up() -> void:
 
 
 func _on_VictoryContainer_visibility_changed() -> void:
-	var is_last_arena = GameData.next_arena >= GameData.ARENA_ORDER.size() - 1
-	next_level_button.visible = !is_last_arena
+	if visible:
+		var is_last_arena = GameData.next_arena >= GameData.ARENA_ORDER.size() - 1
+		next_level_button.visible = !is_last_arena
+		sfx_player.stream = load(AudioData.SFX_PATHS.get(AudioData.SFXKeys.ArenaVictory))
+		sfx_player.volume_db = AudioData.db_level
+		sfx_player.play(0.0)
 
 
 func _on_MainMenuButton_button_up() -> void:

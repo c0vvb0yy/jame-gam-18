@@ -11,6 +11,8 @@ onready var death_explosion = $PlayerMovement/DeathExplosion
 onready var clock = $PlayerMovement/Camera2D/Timer
 var spawn_pos : Vector2
 
+onready var sfx_player = $SFXPlayer
+
 func _ready():
 	vis_effect.visible = true
 
@@ -62,4 +64,9 @@ func kill_player():
 	enable_movement()
 	clock.elapsed_time = 0
 #	reset_explosion()
+
+	# play sound
+	sfx_player.stream = load(AudioData.SFX_PATHS.get(AudioData.SFXKeys.PlayerRewind))
+	sfx_player.volume_db = AudioData.db_level
+	sfx_player.play(0.2)
 

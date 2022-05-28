@@ -6,10 +6,10 @@ const ARENA_ORDER = [
 	"res://src/level/arenas/arena1.tscn", # 1
 #	"res://src/level/arenas/arena2.tscn", # 2
 #	"res://src/level/arenas/arena2-1.tscn", # 3
-	"res://src/level/arenas/arena3.tscn", # 4
+#	"res://src/level/arenas/arena3.tscn", # 4
 #	"res://src/level/arenas/arena3-0-1.tscn", # 5
 #	"res://src/level/arenas/arena3-1.tscn", # 6
-#	"res://src/level/arenas/arena4.tscn", # 7
+	"res://src/level/arenas/arena4.tscn", # 7
 #	"res://src/level/arenas/arena4-1.tscn", # 8
 	"res://src/level/arenas/arena4-2.tscn" # 9
 ]

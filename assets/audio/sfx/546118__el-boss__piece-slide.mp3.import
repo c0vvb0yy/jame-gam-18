@@ -11,5 +11,5 @@ dest_files=[ "res://.import/546118__el-boss__piece-slide.mp3-8c939ebc1654acb5b55
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
