@@ -7,11 +7,16 @@ onready var tween = $Tween
 
 onready var sfx_player = $AudioStreamPlayer2D
 
-const TARGET_SCALE_BODY = 2.5
+var target_scale_body = 2.5
 const TARGET_SCALE_PULSE = 100
 
+export var upgrade_scale_body = 1.5
+
 func _ready() -> void:
-	tween.interpolate_property(ping_body, "scale", Vector2(1, 1), Vector2(TARGET_SCALE_BODY, TARGET_SCALE_BODY), 1.0)
+	if UpgradeData.has_upgrade(UpgradeData.Upgrades.PingRange):
+		target_scale_body += upgrade_scale_body
+	
+	tween.interpolate_property(ping_body, "scale", Vector2(1, 1), Vector2(target_scale_body, target_scale_body), 1.0)
 	tween.interpolate_property(ping_pulse, "scale", Vector2(1, 1), Vector2(TARGET_SCALE_PULSE, TARGET_SCALE_PULSE), 5.0)
 	tween.start()
 	

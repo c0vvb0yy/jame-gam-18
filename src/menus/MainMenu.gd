@@ -19,6 +19,7 @@ var arena_count = GameData.ARENA_ORDER.size()
 const MAX_BUTTONS_IN_ROW = 6
 const SEPARATION_X = 15
 var arena_select_button = preload("res://src/menus/ArenaSelectButton.tscn")
+var shop_item = preload("res://src/menus/ShopItem.tscn")
 
 # refs to other main menu ui
 onready var main_menu_buttons = $MainMenuButtons
@@ -26,6 +27,7 @@ onready var arena_button = $MainMenuButtons/LevelSelectButton
 onready var quit_button = $MainMenuButtons/QuitButton
 onready var credits_container = $CreditsContainer
 onready var shop_container = $ShopContainer
+onready var shop_item_container = $ShopContainer/ShopItemContainer
 
 func _ready() -> void:
 	# startup sound
@@ -33,11 +35,21 @@ func _ready() -> void:
 	start_sfx_player.volume_db = AudioData.db_level
 	start_sfx_player.play(0.0)
 	
+	# unlocks
+	var file_to_check = File.new()
+	var is_file_exists = file_to_check.file_exists("user://skully.json")
+	if is_file_exists:
+		UpgradeData.load_upgrade_data()
+	
 	# generate level selection
 	create_level_items()
+	create_shop_items()
 	set_menu_state(MenuStates.MainMenu)
 	music_player.volume_db = AudioData.db_level
 	music_player.play(1.5)
+	
+	
+	
 
 
 func set_menu_state(value: int):
@@ -83,7 +95,13 @@ func create_level_items():
 				current_h_box = HBoxContainer.new()
 		
 
-
+func create_shop_items():
+	for i in range(4):
+		var item = shop_item.instance()
+		shop_item_container.add_child(item)
+		item.set_upgrade(i)
+		
+	
 func _on_LevelSelectButton_button_up() -> void:
 	# toggle visibility of level_container
 	set_menu_state(MenuStates.ArenaSelect)
@@ -99,6 +117,7 @@ func _on_CreditsButton_button_up() -> void:
 	set_menu_state(MenuStates.Credits)
 
 func _on_QuitButton_button_up() -> void:
+	UpgradeData.save_upgrade_data()
 	get_tree().quit()
 
 

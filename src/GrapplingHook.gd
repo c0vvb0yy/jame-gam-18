@@ -7,10 +7,15 @@ onready var sfx_player = $AudioStreamPlayer2D
 var direction : Vector2  #direction in which the hook was shot
 var hook_pos : Vector2  #end pos of the tip, global position 
 
-export var speed : int
+export var speed : int = 89
+export var upgrade_speed = 300
 
 var is_flying = false #travelling
 var is_hooked = false #connected to a wall or not
+
+func _ready() -> void:
+	if UpgradeData.has_upgrade(UpgradeData.Upgrades.HardGrapple):
+		speed += upgrade_speed
 
 func shoot(dir : Vector2) -> void:
 	direction = dir.normalized()

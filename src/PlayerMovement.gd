@@ -7,9 +7,14 @@ export var gravity : int = 2500
 export var max_slide_force : int = 600
 export var jump_impulse_x = 140
 export var ground_slam_impuse_y = 1500
-export var grappling_pull = 105
+export var grappling_pull = 133
 export var mid_air_control = 30
 export var max_pings = 2
+
+export var upgrade_jumps = 1
+export var upgrade_illumination_scale = 0.5
+export var upgrade_grappling_pull = 133
+export var upgrade_pings = 1
 
 var jumps_made = 0
 var slide_force = 0
@@ -34,6 +39,7 @@ var slide_decay = 15
 onready var sprite = $Sprite
 onready var eye_counter = $Camera2D/CenterContainer/HBoxContainer/EyeCounter
 onready var sfx_player = $AudioStreamPlayer
+onready var player_illumination = $PlayerIllumination
 
 var last_collision
 
@@ -51,6 +57,15 @@ var replay_index = 0
 var start_pos : Vector2
 
 func _ready():
+	if UpgradeData.has_upgrade(UpgradeData.Upgrades.HardGrapple):
+		grappling_pull += upgrade_grappling_pull
+	if UpgradeData.has_upgrade(UpgradeData.Upgrades.ThirdJump):
+		max_jumps += upgrade_jumps
+	if UpgradeData.has_upgrade(UpgradeData.Upgrades.ThirdEye):
+		max_pings += upgrade_pings
+	if UpgradeData.has_upgrade(UpgradeData.Upgrades.PingRange):
+		player_illumination.scale += Vector2(upgrade_illumination_scale, upgrade_illumination_scale)
+	
 	frames = 0
 	replay_index = 0
 	start_pos = self.global_position
