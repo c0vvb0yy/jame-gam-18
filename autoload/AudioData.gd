@@ -54,3 +54,14 @@ var db_level = 14
 
 var last_track = MusicKeys.MainMenu
 var last_playback_position = 0.0
+
+
+func play_button_hover(audio_player : AudioStreamPlayer):
+	audio_player.stream = load(AudioData.SFX_PATHS.get(AudioData.SFXKeys.ButtonHover))
+	audio_player.volume_db = AudioData.db_level
+	audio_player.play(0.0)
+
+func play_button_click(audio_player : AudioStreamPlayer):
+	audio_player.stream = load(AudioData.SFX_PATHS.get(AudioData.SFXKeys.ButtonClick))
+	audio_player.volume_db = AudioData.db_level
+	audio_player.play(0.0)

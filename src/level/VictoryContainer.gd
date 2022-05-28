@@ -33,3 +33,23 @@ func _on_MainMenuButton_button_up() -> void:
 
 func _on_RetryButton_button_up() -> void:
 	launch_arena(GameData.next_arena)
+
+
+func _on_MainMenuButton_button_down() -> void:
+	pass # Replace with function body.
+
+
+func _on_RetryButton_button_down() -> void:
+	pass # Replace with function body.
+
+
+func _on_MainMenuButton_mouse_entered() -> void:
+	pass # Replace with function body.
+
+
+func _on_RetryButton_mouse_entered() -> void:
+	pass # Replace with function body.
+
+
+func _on_NextLevelButton_button_down() -> void:
+	pass # Replace with function body.
