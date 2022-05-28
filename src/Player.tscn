@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://src/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/PlayerMovement.gd" type="Script" id=2]
@@ -43,6 +43,9 @@ animations = [ {
 extents = Vector2( 11.0172, 13.2671 )
 
 [sub_resource type="DynamicFont" id=7]
+font_data = ExtResource( 29 )
+
+[sub_resource type="DynamicFont" id=8]
 font_data = ExtResource( 29 )
 
 [sub_resource type="SpriteFrames" id=6]
@@ -138,6 +141,15 @@ margin_left = 234.0
 margin_top = 40.0
 margin_right = 497.0
 margin_bottom = 171.0
+
+[node name="RewindOnDeathLabel" type="Label" parent="PlayerMovement/Camera2D"]
+visible = false
+margin_left = -99.0
+margin_top = -74.0
+margin_right = 117.0
+margin_bottom = -52.0
+custom_fonts/font = SubResource( 8 )
+text = "press R to rewind"
 
 [node name="DeathExplosion" type="AnimatedSprite" parent="PlayerMovement"]
 position = Vector2( 1, -12 )
