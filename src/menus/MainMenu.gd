@@ -8,6 +8,8 @@ enum MenuStates{
 	Credits
 }
 
+onready var music_player = $MusicPlayer
+
 var current_menu_state = MenuStates.MainMenu
 
 # arena view stuff
@@ -27,6 +29,8 @@ onready var credits_container = $CreditsContainer
 func _ready() -> void:
 	create_level_items()
 	set_menu_state(MenuStates.MainMenu)
+	music_player.volume_db = AudioData.db_level
+	music_player.play(1.5)
 
 
 func set_menu_state(value: int):

@@ -48,3 +48,9 @@ const SFX_PATHS = {
 	SFXKeys.MainMenuLoad : "res://assets/audio/sfx/625149__sysdub__vcr-02.wav",
 	SFXKeys.ArenaLoad : "res://assets/audio/sfx/316556__debsound__analog-tape-noise-10.wav"
 }
+
+
+var db_level = 14
+
+var last_track = MusicKeys.MainMenu
+var last_playback_position = 0.0

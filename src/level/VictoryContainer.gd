@@ -17,8 +17,9 @@ func launch_arena(arena_index):
 func _on_NextLevelButton_button_up() -> void:
 	var new_arena = GameData.next_arena + 1
 	if new_arena < GameData.ARENA_ORDER.size():
-		launch_arena(new_arena)
 		GameData.next_arena += 1
+		launch_arena(new_arena)
+		
 
 
 func _on_VictoryContainer_visibility_changed() -> void:
