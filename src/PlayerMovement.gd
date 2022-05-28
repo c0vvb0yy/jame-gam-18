@@ -72,6 +72,7 @@ func _ready():
 	start_pos = self.global_position
 	eye_counter.text = str(max_pings)
 	grappling_hook = $GrapplingHook
+	
 
 
 func _input(event: InputEvent) -> void:
@@ -119,6 +120,8 @@ func _input(event: InputEvent) -> void:
 				run_pings += 1
 				all_pings += 1
 				eye_counter.text = str(max_pings - run_pings)
+	else:
+		eye_counter.get_parent().visible = false
 
 func _process(delta: float) -> void:
 	update_player_sprite()
@@ -278,26 +281,6 @@ func save_input_for_replay() -> void:
 	if Input.is_action_just_released("ping"): replay.append({"key":"P", "start_frame":self.memory.P, "end_frame":self.frames})
 	
 
-func save_replay() -> void:
-	var file = File.new()
-	#replays will be saved as replay-0.rp replay-1.rp etc
-	file.open(str("replay-", replay_index, ".owo"), File.WRITE)
-	file.store_var(replay)
-	file.close()
-
-func clear_memory():
-	memory = {"L":0, "R":0, "J":0, "C":0, "H":0, "P":0} 
-	frames = 0
-
-func create_ghost():
-	var controllers = get_tree().get_nodes_in_group("ArenaController")
-	if controllers.size() > 0:
-		var controller = controllers[0]
-		var new_ghost = recorded_player.instance()
-		new_ghost.get_node("RecordedPlayerMovement").replay_path = str("replay-", replay_index, ".owo")
-		new_ghost.global_position = start_pos
-		controller.add_child(new_ghost)
-	pass
 
 func _on_Player_kill_player():
 	run_pings = 0
