@@ -92,3 +92,6 @@ func _on_CreditsButton_button_up() -> void:
 func _on_QuitButton_button_up() -> void:
 	get_tree().quit()
 
+
+
+
