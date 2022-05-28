@@ -3,7 +3,7 @@ extends TextureButton
 
 var arena = 0
 onready var label = $Label
-
+onready var sfx_player = $SFXPlayer
 
 func set_arena(value: int):
 	arena = value
@@ -22,3 +22,11 @@ func _on_ArenaSelectButton_button_up() -> void:
 		GameData.next_arena = arena
 		get_tree().change_scene("res://src/level/ArenaController.tscn")
 
+
+
+func _on_ArenaSelectButton_button_down() -> void:
+	AudioData.play_button_click(sfx_player)
+
+
+func _on_ArenaSelectButton_mouse_entered() -> void:
+	AudioData.play_button_hover(sfx_player)

@@ -33,6 +33,9 @@ var slide_decay = 15
 
 onready var sprite = $Sprite
 onready var eye_counter = $Camera2D/CenterContainer/HBoxContainer/EyeCounter
+onready var sfx_player = $AudioStreamPlayer
+
+var last_collision
 
 var grappling_hook
 
@@ -185,6 +188,14 @@ func _physics_process(delta):
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
+	# play sound whenever we collide with something
+	var collision = move_and_collide(Vector2.ZERO)
+	if collision && !last_collision:
+		sfx_player.stream = load(AudioData.SFX_PATHS.get(AudioData.SFXKeys.PlayerSurfaceHit))
+		sfx_player.volume_db = AudioData.db_level - 5
+		sfx_player.play(0.0)
+	last_collision = collision
+	
 	frames += 1
 
 
@@ -199,6 +210,10 @@ func jump():
 	
 	jumps_made += 1
 	#print(str("jumps ", jumps_made, " / ", max_jumps))
+	
+	sfx_player.stream = load(AudioData.SFX_PATHS.get(AudioData.SFXKeys.PlayerJump))
+	sfx_player.volume_db = AudioData.db_level
+	sfx_player.play(0.0)
 	
 
 func update_player_sprite():
@@ -221,6 +236,12 @@ func get_move_state():
 	is_crouching = Input.is_action_pressed("move_crouch")
 	is_sliding = Input.is_action_just_pressed("move_crouch") && !is_zero_approx(velocity.x)
 	is_idling = is_on_floor() && velocity.x < 1 && !is_crouching || !is_sliding
+	
+	# go go gadget spaghetti code
+	if Input.is_action_just_pressed("move_crouch") && is_on_floor():
+		sfx_player.stream = load(AudioData.SFX_PATHS.get(AudioData.SFXKeys.PlayerSlideBegin))
+		sfx_player.volume_db = AudioData.db_level - 2
+		sfx_player.play(0.05)
 
 func save_input_for_replay() -> void:
 	#recodrind starting input

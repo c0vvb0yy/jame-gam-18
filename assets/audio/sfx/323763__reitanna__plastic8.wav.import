@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/323763__reitanna__plastic8.wav-dafb02e676050af2ca4a1f9946ff9605.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/323763__reitanna__plastic8.wav"
+dest_files=[ "res://.import/323763__reitanna__plastic8.wav-dafb02e676050af2ca4a1f9946ff9605.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

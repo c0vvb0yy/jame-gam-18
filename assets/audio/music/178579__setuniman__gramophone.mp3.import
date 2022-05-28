@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/178579__setuniman__gramophone.mp3-8fced4dff29fdedd3318d268e10a94e3.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/music/178579__setuniman__gramophone.mp3"
+dest_files=[ "res://.import/178579__setuniman__gramophone.mp3-8fced4dff29fdedd3318d268e10a94e3.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -15,7 +15,8 @@ const ARENA_ORDER = [
 ]
 
 # var used in the main menu button selection to tell the arena controller which arena to load first / next
-var next_arena = 9
+var last_arena = -1
+var next_arena = 0
 
 var allow_grappling_hook = true
 var allow_ping = true

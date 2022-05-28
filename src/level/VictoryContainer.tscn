@@ -43,7 +43,15 @@ focus_mode = 0
 texture_normal = ExtResource( 4 )
 texture_hover = ExtResource( 3 )
 
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="visibility_changed" from="." to="." method="_on_VictoryContainer_visibility_changed"]
+[connection signal="button_down" from="ButtonContainer/MainMenuButton" to="." method="_on_MainMenuButton_button_down"]
 [connection signal="button_up" from="ButtonContainer/MainMenuButton" to="." method="_on_MainMenuButton_button_up"]
+[connection signal="mouse_entered" from="ButtonContainer/MainMenuButton" to="." method="_on_MainMenuButton_mouse_entered"]
+[connection signal="button_down" from="ButtonContainer/NextLevelButton" to="." method="_on_NextLevelButton_button_down"]
 [connection signal="button_up" from="ButtonContainer/NextLevelButton" to="." method="_on_NextLevelButton_button_up"]
+[connection signal="mouse_entered" from="ButtonContainer/NextLevelButton" to="." method="_on_NextLevelButton_mouse_entered"]
+[connection signal="button_down" from="ButtonContainer/RetryButton" to="." method="_on_RetryButton_button_down"]
 [connection signal="button_up" from="ButtonContainer/RetryButton" to="." method="_on_RetryButton_button_up"]
+[connection signal="mouse_entered" from="ButtonContainer/RetryButton" to="." method="_on_RetryButton_mouse_entered"]

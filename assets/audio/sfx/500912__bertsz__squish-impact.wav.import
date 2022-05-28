@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/500912__bertsz__squish-impact.wav-a84ea5838ec79a6c90d6f89b97e75b34.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/500912__bertsz__squish-impact.wav"
+dest_files=[ "res://.import/500912__bertsz__squish-impact.wav-a84ea5838ec79a6c90d6f89b97e75b34.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
