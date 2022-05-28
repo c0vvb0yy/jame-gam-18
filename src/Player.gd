@@ -38,8 +38,7 @@ func disable_movement():
 	body.set_process_input(false)
 	body.input = 0
 	clock.set_process(false)
-	on_death_label.visible = true
-	on_death_label.modulate.a = 0
+
 
 func enable_movement():
 	body.set_process(true)
@@ -52,6 +51,8 @@ func play_anim():
 	death_explosion.frame = 0
 	death_explosion.play("default")
 	body.sprite.visible = false
+	on_death_label.visible = true
+	on_death_label.modulate.a = 0
 
 #func play_explosion():
 #	death_explosion.visible = true

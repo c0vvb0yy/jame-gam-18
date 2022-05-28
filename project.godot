@@ -27,15 +27,15 @@ _global_script_class_icons={
 [application]
 
 config/name="Jame-gam- 18"
-run/main_scene="res://src/level/ArenaController.tscn"
+run/main_scene="res://src/menus/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 GameData="*res://autoload/GameData.gd"
 AudioData="*res://autoload/AudioData.gd"
-PlayerData="*res://autoload/PlayerData.gd"
 UpgradeData="*res://autoload/UpgradeData.gd"
+PlayerData="*res://autoload/PlayerData.gd"
 
 [display]
 
