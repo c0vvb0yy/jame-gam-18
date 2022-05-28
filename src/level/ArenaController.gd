@@ -14,6 +14,10 @@ onready var sfx_player = $SFXPlayer
 func _ready() -> void:
 	load_arena(GameData.next_arena)
 
+func _input(event):
+	if event.is_action("return_to_menu"):
+		get_tree().change_scene("res://src/menus/MainMenu.tscn")
+
 func get_player_ref():
 	var players =  get_tree().get_nodes_in_group("Player")
 	if players.size() > 0:
