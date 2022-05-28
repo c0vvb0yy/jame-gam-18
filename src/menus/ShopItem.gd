@@ -1,6 +1,9 @@
 extends HBoxContainer
 
 var upgrade = 0
+var price = 0
+
+signal update_money_label
 
 onready var button = $TextureButton
 onready var label_name = $VBoxContainer/LabelName
@@ -23,16 +26,26 @@ func set_upgrade(value: int):
 	if is_owned:
 		label_name.text += " (owned)"
 	else:
-		var price = UpgradeData.UPGRADE_PRICES.get(upgrade)
-		label_desc.text += str("\ncost: ", price)
+		price = UpgradeData.UPGRADE_PRICES.get(upgrade)
+		label_desc.text += str("\ncost: ", price, " G")
 	
 	
 func buy_upgrade():
-	var enough_money = true # lol
+	var enough_money = PlayerData.player_money >= price
 	if enough_money:
 		UpgradeData.upgrade_got_data[upgrade] = true
 		UpgradeData.save_upgrade_data()
 		set_upgrade(upgrade) # call this to update the visuals
+		PlayerData.player_money -= price
+		
+		# tell the main menu controller to update the money label
+		var controllers = get_tree().get_nodes_in_group("MainMenuController")
+		if controllers.size() > 0:
+			var controller = controllers[0]
+			connect("update_money_label", controller, "update_money_label")
+			emit_signal("update_money_label")
+			disconnect("update_money_label", controller, "update_money_label")
+		
 
 func _on_TextureButton_button_up() -> void:
 	var is_owned = UpgradeData.upgrade_got_data.get(upgrade)

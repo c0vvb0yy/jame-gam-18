@@ -62,7 +62,6 @@ script = ExtResource( 1 )
 [node name="PlayerMovement" type="KinematicBody2D" parent="."]
 z_as_relative = false
 script = ExtResource( 2 )
-grappling_pull = 133
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PlayerMovement"]
 
@@ -84,7 +83,6 @@ shape = SubResource( 4 )
 
 [node name="GrapplingHook" parent="PlayerMovement" instance=ExtResource( 6 )]
 position = Vector2( 0, -9 )
-speed = 89
 
 [node name="Camera2D" type="Camera2D" parent="PlayerMovement"]
 z_index = 5
