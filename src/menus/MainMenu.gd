@@ -50,7 +50,7 @@ func _ready() -> void:
 	music_player.play(1.5)
 	
 	
-	
+	arena_container.add_constant_override("separation", SEPARATION_X)
 
 
 func set_menu_state(value: int):
