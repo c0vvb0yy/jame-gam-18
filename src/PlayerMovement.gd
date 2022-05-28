@@ -16,6 +16,7 @@ var slide_force = 0
 var velocity = Vector2.ZERO
 var chain_velocity = Vector2.ZERO
 var run_pings = 0
+var all_pings = 0
 
 #move state vars
 var is_falling : bool
@@ -101,12 +102,14 @@ func _input(event: InputEvent) -> void:
 					new_ping.global_position = global_position
 					controller.add_child(new_ping)
 				run_pings += 1
+				all_pings += 1
 				eye_counter.text = str(max_pings - run_pings)
 
 func _process(delta: float) -> void:
 	update_player_sprite()
 
-
+func get_pings_used_in_level() -> int:
+	return all_pings
 
 func _physics_process(delta):
 	

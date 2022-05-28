@@ -5,6 +5,7 @@ class_name Player
 signal kill_player
 
 onready var victory_container = $PlayerMovement/Camera2D/VictoryContainer
+onready var victory_screen = $PlayerMovement/Camera2D/VictoryScreen
 onready var body = $PlayerMovement
 onready var vis_effect = $PlayerMovement/Camera2D/VHSEffect
 onready var death_explosion = $PlayerMovement/DeathExplosion

@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/fonts/objects/arena_text2.tres" type="DynamicFontData" id=1]
+[ext_resource path="res://src/VictoryScreen.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 8
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 8
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 1 )
+
+[node name="VictoryScreen" type="Control"]
+margin_right = 276.0
+margin_bottom = 128.0
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+custom_constants/separation = 8
+
+[node name="TimeLabel" type="Label" parent="VBoxContainer"]
+margin_right = 250.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 1 )
+text = "Took: 40s - D Rank"
+
+[node name="NextRankTimeLabel" type="Label" parent="VBoxContainer"]
+margin_top = 30.0
+margin_right = 250.0
+margin_bottom = 41.0
+custom_fonts/font = SubResource( 2 )
+text = "need 30 for C rank"
+
+[node name="EyesLabel" type="Label" parent="VBoxContainer"]
+margin_top = 49.0
+margin_right = 250.0
+margin_bottom = 71.0
+custom_fonts/font = SubResource( 3 )
+text = "Used:  2 eyes - S Rank"
+
+[node name="NextRankEyesLabel" type="Label" parent="VBoxContainer"]
+margin_top = 79.0
+margin_right = 250.0
+margin_bottom = 90.0
+custom_fonts/font = SubResource( 4 )
+text = "POG"
+
+[node name="MoneyLabel" type="Label" parent="VBoxContainer"]
+margin_top = 98.0
+margin_right = 250.0
+margin_bottom = 120.0
+custom_fonts/font = SubResource( 5 )
+text = "Got: 4G"

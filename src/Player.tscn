@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://src/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/PlayerMovement.gd" type="Script" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://assets/explosion_img_seq/frame_01_delay-0.1s.png" type="Texture" id=27]
 [ext_resource path="res://assets/player/player_eye.png" type="Texture" id=28]
 [ext_resource path="res://assets/fonts/objects/arena_text2.tres" type="DynamicFontData" id=29]
+[ext_resource path="res://src/VictoryScreen.tscn" type="PackedScene" id=30]
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
@@ -132,6 +133,12 @@ margin_right = 33.0
 margin_bottom = 22.0
 custom_fonts/font = SubResource( 7 )
 text = "2"
+
+[node name="VictoryScreen" parent="PlayerMovement/Camera2D" instance=ExtResource( 30 )]
+margin_left = 234.0
+margin_top = 40.0
+margin_right = 497.0
+margin_bottom = 171.0
 
 [node name="DeathExplosion" type="AnimatedSprite" parent="PlayerMovement"]
 position = Vector2( 1, -12 )

@@ -16,10 +16,14 @@ export var ping_B = 2
 export var ping_C = 3
 # export var eyes_D = 4
 
+#arrays for easier comparison to next rank needed
+onready var time_brackets = [time_C, time_B, time_A, time_S]
+onready var ping_brackets = [ping_C, ping_B, ping_A, ping_S]
 
 func _ready() -> void:
 	GameData.allow_grappling_hook = allow_grappling_hook
 	GameData.allow_ping = allow_ping
+	
 
 
 func player_spawn_point_global_coords() -> Vector2:
