@@ -32,15 +32,18 @@ func disable_movement():
 	body.set_physics_process(false)
 	body.set_process_input(false)
 	body.input = 0
+	clock.set_process(false)
 
 func enable_movement():
 	body.set_process(true)
 	body.set_physics_process(true)
 	body.set_process_input(true)
+	clock.set_process(true)
 
 func play_anim():
 	death_explosion.frame = 0
 	death_explosion.play("default")
+	body.sprite.visible = false
 
 #func play_explosion():
 #	death_explosion.visible = true
@@ -64,6 +67,7 @@ func kill_player():
 	body.eye_counter.text = str(body.max_pings)
 	enable_movement()
 	clock.elapsed_time = 0
+	body.sprite.visible = true
 #	reset_explosion()
 
 	# play sound
