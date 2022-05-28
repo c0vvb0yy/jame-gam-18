@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/316556__debsound__analog-tape-noise-10.wav-be90653768f2d7b81c2d0b79542e6ba6.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/316556__debsound__analog-tape-noise-10.wav"
+dest_files=[ "res://.import/316556__debsound__analog-tape-noise-10.wav-be90653768f2d7b81c2d0b79542e6ba6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

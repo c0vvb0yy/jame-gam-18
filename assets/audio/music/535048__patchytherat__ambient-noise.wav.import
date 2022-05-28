@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/535048__patchytherat__ambient-noise.wav-625a9d8c9562a8f113c19772c9bb80b4.sample"
+
+[deps]
+
+source_file="res://assets/audio/music/535048__patchytherat__ambient-noise.wav"
+dest_files=[ "res://.import/535048__patchytherat__ambient-noise.wav-625a9d8c9562a8f113c19772c9bb80b4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

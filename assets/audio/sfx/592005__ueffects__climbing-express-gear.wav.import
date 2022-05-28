@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/592005__ueffects__climbing-express-gear.wav-9b75570ceb774b8884c627a3c43303db.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/592005__ueffects__climbing-express-gear.wav"
+dest_files=[ "res://.import/592005__ueffects__climbing-express-gear.wav-9b75570ceb774b8884c627a3c43303db.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
