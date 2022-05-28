@@ -27,13 +27,14 @@ func _on_NextLevelButton_button_up() -> void:
 func _on_VictoryContainer_visibility_changed() -> void:
 	if visible:
 		# save the current level that it was finished
-		if !PlayerData.finished_levels.has(GameData.next_arena):
+		if !PlayerData.finished_levels.has(GameData.next_arena): # prevent duplicates
 			PlayerData.finished_levels.append(GameData.next_arena)
 			#print(GameData.next_arena)
 		# also save the next level because when you finish a level, you should also be able to *access* the following arena
 		var new_arena = GameData.next_arena + 1
 		if new_arena < GameData.ARENA_ORDER.size():
-			PlayerData.finished_levels.append(new_arena)
+			if !PlayerData.finished_levels.has(new_arena): # prevent duplicates
+				PlayerData.finished_levels.append(new_arena)
 		UpgradeData.save_upgrade_data()
 			#print(str("finished lvls" , PlayerData.finished_levels))
 		
