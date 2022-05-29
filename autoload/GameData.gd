@@ -16,7 +16,13 @@ const ARENA_ORDER = [
 	"res://src/level/arenas/arena5.tscn", # 11
 	"res://src/level/arenas/arena5-1.tscn", # 12
 	"res://src/level/arenas/arena6.tscn", # 13
-	"res://src/level/arenas/arena7.tscn" # 14
+	"res://src/level/arenas/arena7.tscn", # 14
+	"res://src/level/arenas/arena7-1.tscn", # 15
+	"res://src/level/arenas/arena-7-1-1.tscn", # 16
+	"res://src/level/arenas/arena8.tscn", # 17
+	"res://src/level/arenas/arena8-1.tscn", # 18
+	"res://src/level/arenas/arena8-2.tscn", # 19
+	"res://src/level/arenas/arena9.tscn" # 20
 ]
 
 # var used in the main menu button selection to tell the arena controller which arena to load first / next

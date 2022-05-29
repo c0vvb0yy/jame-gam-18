@@ -10,16 +10,11 @@ onready var sfx_player = $AudioStreamPlayer
 
 var player 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
-
-
+func set_enabled(value: bool):
+	for c in get_children():
+		if c is CollisionPolygon2D or c is CollisionShape2D:
+			c.disabled = !value
+			#print("end")
 
 
 func _on_DeathZone_body_entered(body: Node) -> void:
