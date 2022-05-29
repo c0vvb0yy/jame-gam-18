@@ -66,7 +66,6 @@ script = ExtResource( 1 )
 [node name="PlayerMovement" type="KinematicBody2D" parent="."]
 z_as_relative = false
 script = ExtResource( 2 )
-mid_air_control = 134
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PlayerMovement"]
 
@@ -78,8 +77,8 @@ region_rect = Rect2( 0, 0, 0, -7.811 )
 
 [node name="PlayerIllumination" type="AnimatedSprite" parent="PlayerMovement"]
 z_index = -1
+z_as_relative = false
 frames = SubResource( 5 )
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerMovement"]

@@ -44,7 +44,7 @@ const UPGRADE_PRICES = {
 const UPGRADE_NAMES = {
 	Upgrades.ThirdEye : "Third Eye",
 	Upgrades.HardGrapple : "Eldritch Pull",
-	Upgrades.ThirdJump : "Vapor Delving",
+	Upgrades.ThirdJump : "Somnambulation",
 	Upgrades.PingRange : "Lustrous Cornea"
 }
 
