@@ -100,7 +100,6 @@ margin_right = 814.0
 margin_bottom = 144.0
 
 [node name="CreditsContainer" type="VBoxContainer" parent="."]
-visible = false
 margin_left = 120.0
 margin_top = 10.0
 margin_right = 949.0
@@ -108,42 +107,69 @@ margin_bottom = 509.0
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CreditsContainer"]
-margin_right = 829.0
+margin_right = 834.0
 margin_bottom = 123.0
 mouse_filter = 2
 
 [node name="BackButton" type="TextureButton" parent="CreditsContainer/VBoxContainer"]
-margin_right = 829.0
+margin_right = 834.0
 margin_bottom = 64.0
 texture_normal = ExtResource( 3 )
 texture_hover = ExtResource( 4 )
 
 [node name="Label" type="Label" parent="CreditsContainer/VBoxContainer"]
 margin_top = 68.0
-margin_right = 829.0
+margin_right = 834.0
 margin_bottom = 123.0
 custom_fonts/font = ExtResource( 6 )
 text = "credits"
 align = 1
 
-[node name="Label" type="Label" parent="CreditsContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CreditsContainer"]
 margin_top = 127.0
-margin_right = 829.0
-margin_bottom = 499.0
+margin_right = 834.0
+margin_bottom = 549.0
+rect_min_size = Vector2( 829, 0 )
+
+[node name="Label" type="Label" parent="CreditsContainer/HBoxContainer"]
+margin_right = 415.0
+margin_bottom = 422.0
+rect_min_size = Vector2( 415, 0 )
 custom_fonts/font = ExtResource( 8 )
-text = "jaam (@c0vvb0yy)
-ndfbghjfg
+text = "jaa'm (@c0vvb0yy)
+game design
+programming
+shader
+pixel art
 
 snek (@SnekOfSpice)
-dfjhgjfh
-
+game design
+level design
+programming
+pixel art
+sound design
 
 fonts:
 Pixel Pirate by SparklyDest
 GhastlyPixe by Cyndi Ellis
+"
+autowrap = true
 
+[node name="Label2" type="Label" parent="CreditsContainer/HBoxContainer"]
+margin_left = 419.0
+margin_top = 62.0
+margin_right = 834.0
+margin_bottom = 359.0
+rect_min_size = Vector2( 415, 0 )
+custom_fonts/font = ExtResource( 8 )
+text = "tileset based on artwork by MyNameIsntBob
 
-tileset based on artwork by MyNameIsntBob (https://github.com/MyNameIsntBob/Art/tree/master/TutorialArt)"
+explosion stolen from deltarune
+
+All sounds from freesound.org under CC0, except for gramophone by Setuniman under Attribution License
+
+Space Fungus Games (c) 2022
+that's us, jaa'm and snek, hi OwO"
 autowrap = true
 
 [node name="ShopContainer" type="VBoxContainer" parent="."]
