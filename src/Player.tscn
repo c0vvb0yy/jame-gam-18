@@ -137,9 +137,9 @@ text = "2"
 
 [node name="VictoryScreen" parent="PlayerMovement/Camera2D" instance=ExtResource( 30 )]
 margin_left = 234.0
-margin_top = 40.0
+margin_top = 18.0
 margin_right = 497.0
-margin_bottom = 171.0
+margin_bottom = 149.0
 
 [node name="RewindOnDeathLabel" type="Label" parent="PlayerMovement/Camera2D"]
 visible = false

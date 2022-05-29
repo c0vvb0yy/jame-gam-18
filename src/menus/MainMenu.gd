@@ -29,6 +29,7 @@ onready var credits_container = $CreditsContainer
 onready var shop_container = $ShopContainer
 onready var shop_item_container = $ShopContainer/ShopItemContainer
 onready var money_label = $ShopContainer/VBoxContainer/HBoxContainer/MoneyLabel
+onready var banner_sprite = $Sprite
 
 func _ready() -> void:
 	# startup sound
@@ -64,6 +65,7 @@ func set_menu_state(value: int):
 	arena_container.visible = is_arena_select
 	credits_container.visible = is_credits
 	shop_container.visible = is_shop
+	banner_sprite.visible = is_main_menu
 
 
 func create_level_items():

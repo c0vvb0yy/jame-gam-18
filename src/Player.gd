@@ -15,7 +15,10 @@ var spawn_pos : Vector2
 
 onready var sfx_player = $SFXPlayer
 
+enum { ALIVE, DEAD }
+var state
 func _ready():
+	state = ALIVE
 	vis_effect.visible = true
 
 func _input(event):
@@ -46,6 +49,7 @@ func enable_movement():
 	body.set_process_input(true)
 	clock.set_process(true)
 	on_death_label.visible = false
+	
 
 func play_anim():
 	death_explosion.frame = 0
@@ -54,6 +58,11 @@ func play_anim():
 	on_death_label.visible = true
 	on_death_label.modulate.a = 0
 
+func play_death_sound():
+	sfx_player.stream = load(AudioData.SFX_PATHS.get(AudioData.SFXKeys.PlayerDeath))
+	sfx_player.volume_db = AudioData.db_level
+	sfx_player.play(0.4)
+
 #func play_explosion():
 #	death_explosion.visible = true
 #	death_explosion.play("default")
@@ -61,6 +70,13 @@ func play_anim():
 
 #func reset_explosion():
 #	death_explosion.frame = 0
+
+func die():
+	if state == ALIVE:
+		disable_movement()
+		play_anim()
+		play_death_sound()
+		state = DEAD
 
 func kill_player():
 	# get the arena controller
@@ -72,13 +88,15 @@ func kill_player():
 		connect("kill_player", controller, "end_run")
 		emit_signal("kill_player")
 		disconnect("kill_player", controller, "end_run")
+	state = ALIVE
 	body.position = spawn_pos
 	body.eye_counter.text = str(body.max_pings)
 	enable_movement()
 	clock.elapsed_time = 0
 	body.sprite.visible = true
-#	reset_explosion()
-
+	
+	victory_container.visible = false
+	victory_screen.clear()
 	# play sound
 	sfx_player.stream = load(AudioData.SFX_PATHS.get(AudioData.SFXKeys.PlayerRewind))
 	sfx_player.volume_db = AudioData.db_level

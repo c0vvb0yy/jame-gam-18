@@ -8,7 +8,7 @@ export var max_slide_force : int = 600
 export var jump_impulse_x = 140
 export var ground_slam_impuse_y = 1500
 export var grappling_pull = 133
-export var mid_air_control = 30
+export var mid_air_control = 134
 export var max_pings = 2
 
 export var upgrade_jumps = 1
@@ -177,10 +177,11 @@ func _physics_process(delta):
 		jump()
 #	if is_jump_cancelled:
 #		velocity.y = 0
-	if is_crouching:
+	if is_crouching :#&& is_jumping:
 		if input == 0:
 			# ground slam
 			velocity.y = ground_slam_impuse_y
+			velocity.x = 0
 	
 	chain_velocity = Vector2.ZERO
 	if grappling_hook != null:
@@ -207,7 +208,7 @@ func _physics_process(delta):
 		velocity.x += sign(input) * mid_air_control
 		#velocity.x *= 0.5
 	
-	velocity = move_and_slide(velocity, Vector2.UP)
+	velocity = move_and_slide(Vector2(min(1500,velocity.x), min(1500, velocity.y)), Vector2.UP)
 	
 	# play sound whenever we collide with something
 	var collision = move_and_collide(Vector2.ZERO)
