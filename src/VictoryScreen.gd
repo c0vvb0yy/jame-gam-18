@@ -14,6 +14,9 @@ var ping_rank = -1
 var money_sum = 0
 
 func _ready():
+	clear()
+
+func clear():
 	next_eyes_label.visible = false
 	next_time_label.visible = false
 	time_label.text = ""
@@ -22,7 +25,10 @@ func _ready():
 
 func show_stats(time_taken, pings_used, time_arr, ping_arr) -> void:
 	time_label.text = evaluate_time(time_taken, time_arr)
-	eyes_label.text = evaluate_pings(pings_used, ping_arr)
+	if GameData.allow_ping:
+		eyes_label.text = evaluate_pings(pings_used, ping_arr)
+	else:
+		eyes_label.visible = false
 	evaluate_money()
 	money_label.text = str("got ", money_sum, " G")
 	
@@ -55,6 +61,7 @@ func evaluate_pings(pings_used, ping_arr) -> String :
 	if(ping_arr[ping_arr.size()-1] == 0):
 		#then S rank is zero and player-inactivity should not be praised 
 		ping_rank = -1
+		eyes_label.visible = false
 		return ""
 	var numerical_rank = -1
 	for i in ping_arr.size():
@@ -64,9 +71,12 @@ func evaluate_pings(pings_used, ping_arr) -> String :
 	if numerical_rank < 3:
 		var next_rank = numerical_rank+1
 		var next_rank_string = str("maximum of ", ping_arr[next_rank], " for ", num_to_rank[next_rank], " rank")
+		next_eyes_label.visible = true
+		next_eyes_label.text = next_rank_string
 	ping_rank = numerical_rank
 	var eye_str = "eyes" if pings_used != 1 else "eye"
 	var ping_string = str("used ", pings_used, " ", eye_str, " - ", num_to_rank[numerical_rank], " rank!")
+	if !eyes_label.visible: eyes_label.visible = true
 	return ping_string
 
 func evaluate_money():

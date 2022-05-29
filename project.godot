@@ -37,8 +37,8 @@ config/icon="res://icon.png"
 
 GameData="*res://autoload/GameData.gd"
 AudioData="*res://autoload/AudioData.gd"
-PlayerData="*res://autoload/PlayerData.gd"
 UpgradeData="*res://autoload/UpgradeData.gd"
+PlayerData="*res://autoload/PlayerData.gd"
 
 [display]
 

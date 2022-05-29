@@ -78,7 +78,6 @@ region_rect = Rect2( 0, 0, 0, -7.811 )
 z_index = -5
 z_as_relative = false
 frames = SubResource( 5 )
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerMovement"]
@@ -137,9 +136,9 @@ text = "2"
 
 [node name="VictoryScreen" parent="PlayerMovement/Camera2D" instance=ExtResource( 30 )]
 margin_left = 234.0
-margin_top = 40.0
+margin_top = 18.0
 margin_right = 497.0
-margin_bottom = 171.0
+margin_bottom = 149.0
 
 [node name="RewindOnDeathLabel" type="Label" parent="PlayerMovement/Camera2D"]
 visible = false
