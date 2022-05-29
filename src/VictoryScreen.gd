@@ -58,11 +58,6 @@ func evaluate_time(time_taken, time_arr) -> String:
 	return time_string
 
 func evaluate_pings(pings_used, ping_arr) -> String :
-	if(ping_arr[ping_arr.size()-1] == 0):
-		#then S rank is zero and player-inactivity should not be praised 
-		ping_rank = -1
-		eyes_label.visible = false
-		return ""
 	var numerical_rank = -1
 	for i in ping_arr.size():
 		if pings_used <= ping_arr[i]:
