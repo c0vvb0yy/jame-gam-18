@@ -49,7 +49,7 @@ func buy_upgrade():
 
 func _on_TextureButton_button_up() -> void:
 	var is_owned = UpgradeData.upgrade_got_data.get(upgrade)
-	print(is_owned)
+	#print(is_owned)
 	if !is_owned: 
 		buy_upgrade()
 
