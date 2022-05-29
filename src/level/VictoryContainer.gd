@@ -75,3 +75,20 @@ func _on_NextLevelButton_button_down() -> void:
 
 func _on_NextLevelButton_mouse_entered() -> void:
 	AudioData.play_button_hover(sfx_player)
+
+
+func _on_ShopButton_mouse_entered() -> void:
+	AudioData.play_button_hover(sfx_player)
+
+
+func _on_ShopButton_button_down() -> void:
+	AudioData.play_button_click(sfx_player)
+
+
+func _on_ShopButton_button_up() -> void:
+	var controllers = get_tree().get_nodes_in_group("VictoryShop")
+	if controllers.size() > 0:
+		var shop = controllers[0]
+		shop.create_shop_items()
+		shop.visible = true
+		

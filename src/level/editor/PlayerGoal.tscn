@@ -19,7 +19,7 @@ animations = [ {
 "speed": 1.0
 } ]
 
-[node name="PlayerGoal" type="Node2D"]
+[node name="PlayerGoal" type="Node2D" groups=["PlayerGoal"]]
 script = ExtResource( 2 )
 
 [node name="Icon" type="Sprite" parent="."]
@@ -33,7 +33,7 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-z_index = 20
+z_index = 10
 z_as_relative = false
 frames = SubResource( 2 )
 frame = 1
