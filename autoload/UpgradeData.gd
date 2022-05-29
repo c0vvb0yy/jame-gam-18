@@ -97,7 +97,7 @@ func save_upgrade_data() -> void:
 	data["upgrade_got_data"] = upgrade_got_data
 	data["player_money"] = PlayerData.player_money
 	data["finished_levels"] = PlayerData.finished_levels
-	print(data)
+	#print(data)
 	var save_file = File.new()
 	save_file.open(save_path, File.WRITE)
 	save_file.store_line(to_json(data))

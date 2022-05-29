@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://src/Player.gd" type="Script" id=1]
 [ext_resource path="res://src/PlayerMovement.gd" type="Script" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://assets/player/player_eye.png" type="Texture" id=28]
 [ext_resource path="res://assets/fonts/objects/arena_text2.tres" type="DynamicFontData" id=29]
 [ext_resource path="res://src/VictoryScreen.tscn" type="PackedScene" id=30]
+[ext_resource path="res://src/menus/VictoryShop.tscn" type="PackedScene" id=31]
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
@@ -70,14 +71,13 @@ mid_air_control = 134
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PlayerMovement"]
 
 [node name="Sprite" type="Sprite" parent="PlayerMovement"]
-z_index = 4
+z_index = 2
 z_as_relative = false
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 0, -7.811 )
 
 [node name="PlayerIllumination" type="AnimatedSprite" parent="PlayerMovement"]
-z_index = -5
-z_as_relative = false
+z_index = -1
 frames = SubResource( 5 )
 frame = 1
 playing = true
@@ -95,9 +95,9 @@ z_as_relative = false
 script = ExtResource( 7 )
 
 [node name="VictoryContainer" parent="PlayerMovement/Camera2D" instance=ExtResource( 8 )]
-margin_left = 236.0
+margin_left = 163.0
 margin_top = 174.0
-margin_right = 468.0
+margin_right = 463.0
 margin_bottom = 270.0
 
 [node name="Timer" parent="PlayerMovement/Camera2D" instance=ExtResource( 9 )]
@@ -137,10 +137,10 @@ custom_fonts/font = SubResource( 7 )
 text = "2"
 
 [node name="VictoryScreen" parent="PlayerMovement/Camera2D" instance=ExtResource( 30 )]
-margin_left = 234.0
-margin_top = 18.0
-margin_right = 497.0
-margin_bottom = 149.0
+margin_left = 165.0
+margin_top = 40.0
+margin_right = 463.0
+margin_bottom = 171.0
 
 [node name="RewindOnDeathLabel" type="Label" parent="PlayerMovement/Camera2D"]
 visible = false
@@ -150,6 +150,8 @@ margin_right = 117.0
 margin_bottom = -52.0
 custom_fonts/font = SubResource( 8 )
 text = "press R to rewind"
+
+[node name="VictoryShop" parent="PlayerMovement/Camera2D" instance=ExtResource( 31 )]
 
 [node name="DeathExplosion" type="AnimatedSprite" parent="PlayerMovement"]
 position = Vector2( 1, -12 )

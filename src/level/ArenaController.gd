@@ -117,7 +117,7 @@ func show_victory_screen():
 	get_player_ref()
 	current_player.disable_movement()
 	current_player.victory_screen.show_stats(current_player.clock.get_seconds(), current_player.body.get_pings_used_in_level(), current_arena.time_brackets, current_arena.ping_brackets)
-	print("you won")
+	#print("you won")
 
 func end_run():
 	get_player_ref()
@@ -126,7 +126,7 @@ func end_run():
 	# stop recording
 	# reset player position
 	# play all recordings
-	print("ctr got player kill")
+	#print("ctr got player kill")
 	
 
 func play_recordings():

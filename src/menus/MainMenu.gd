@@ -80,7 +80,7 @@ func create_level_items():
 	var current_h_box = HBoxContainer.new()
 	var button_count_row = 0
 	
-	print(PlayerData.finished_levels)
+	#print(PlayerData.finished_levels)
 	while current_button_count < arena_count:
 		var new_button = arena_select_button.instance()
 
@@ -91,7 +91,7 @@ func create_level_items():
 #	for level in PlayerData.finished_levels:
 #		var new_button = arena_select_button.instance()
 #		current_h_box.add_child(new_button)
-		print(str("instancing level ", current_button_count))
+		#print(str("instancing level ", current_button_count))
 #		new_button.set_arena(level)
 		if !PlayerData.finished_levels.has(current_button_count) && current_button_count != 0:
 			new_button.queue_free()

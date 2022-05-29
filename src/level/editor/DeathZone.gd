@@ -29,6 +29,6 @@ func _on_DeathZone_body_entered(body: Node) -> void:
 
 
 func _on_Timer_timeout():
-	print("killed player")
+	#print("killed player")
 	player.kill_player()
 	pass # Replace with function body.

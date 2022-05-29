@@ -71,7 +71,7 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	
 	if jump_next:
-		print("jumping")
+		#print("jumping")
 		if jump_count < max_jumps:
 			jump_count += 1
 			velocity.y = -jump_strength
